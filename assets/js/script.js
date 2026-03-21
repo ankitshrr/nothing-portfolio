@@ -129,187 +129,6 @@ function setActiveByScroll() {
 }
 window.addEventListener("scroll", setActiveByScroll, { passive: true });
 
-// Playground logic
-const board = document.getElementById("playBoard");
-const boardLabel = document.getElementById("boardLabel");
-const boardSegs = Array.from(board.querySelectorAll(".play-seg"));
-const modeLabel = document.getElementById("modeLabel");
-const speedLabel = document.getElementById("speedLabel");
-const autoToggle = document.getElementById("autoToggle");
-
-let playTimer = null;
-let speedMs = 160;
-let mode = "SWEEP";
-let autoMode = true;
-
-function setMode(m) {
-  mode = m;
-  modeLabel.textContent = m;
-}
-function setSpeed(s) {
-  if (s === "slow") {
-    speedMs = 260;
-    speedLabel.textContent = "SLOW";
-  }
-  if (s === "med") {
-    speedMs = 160;
-    speedLabel.textContent = "MED";
-  }
-  if (s === "fast") {
-    speedMs = 90;
-    speedLabel.textContent = "FAST";
-  }
-  if (autoMode) startPlayAuto();
-}
-
-function allOff() {
-  boardSegs.forEach((seg) => seg.classList.remove("on"));
-}
-function light(indexes) {
-  allOff();
-  indexes.forEach((i) => boardSegs[i]?.classList.add("on"));
-}
-function stopPlay() {
-  if (playTimer) clearInterval(playTimer);
-  playTimer = null;
-  allOff();
-}
-
-function runSweep() {
-  stopPlay();
-  let i = 0;
-  playTimer = setInterval(() => {
-    light([i, (i + 3) % boardSegs.length]);
-    i = (i + 1) % boardSegs.length;
-  }, speedMs);
-}
-function runPulse() {
-  stopPlay();
-  let on = false;
-  playTimer = setInterval(() => {
-    on = !on;
-    if (on) boardSegs.forEach((seg) => seg.classList.add("on"));
-    else allOff();
-  }, Math.max(120, speedMs * 1.35));
-}
-function runChaos() {
-  stopPlay();
-  playTimer = setInterval(() => {
-    const picks = new Set();
-    while (picks.size < 3) picks.add(Math.floor(Math.random() * boardSegs.length));
-    light([...picks]);
-  }, speedMs);
-}
-function runHeartbeat() {
-  stopPlay();
-  const beat = () => {
-    light([0, 2, 4, 7, 8]);
-    setTimeout(() => light([1, 3, 5, 6, 8]), 120);
-    setTimeout(() => allOff(), 240);
-  };
-  beat();
-  playTimer = setInterval(beat, Math.max(800, speedMs * 6));
-}
-function runStairs() {
-  stopPlay();
-  const steps = [[0], [0, 1], [0, 1, 2], [0, 1, 2, 3], [2, 3, 4], [4, 5, 6], [6, 7, 8], [8]];
-  let i = 0;
-  playTimer = setInterval(() => {
-    light(steps[i]);
-    i = (i + 1) % steps.length;
-  }, Math.max(90, speedMs));
-}
-
-function runCurrentPattern() {
-  if (mode === "SWEEP") runSweep();
-  if (mode === "PULSE") runPulse();
-  if (mode === "CHAOS") runChaos();
-  if (mode === "HEARTBEAT") runHeartbeat();
-  if (mode === "STAIRS") runStairs();
-}
-
-function startPlayAuto() {
-  autoMode = true;
-  autoToggle.classList.add("on");
-  autoToggle.setAttribute("aria-checked", "true");
-  boardLabel.textContent = "AUTO_RUNNING";
-  runCurrentPattern();
-}
-function setPlayManual() {
-  autoMode = false;
-  autoToggle.classList.remove("on");
-  autoToggle.setAttribute("aria-checked", "false");
-  boardLabel.textContent = "CLICK_TO_TRIGGER";
-  stopPlay();
-}
-function toggleAuto() {
-  if (autoMode) setPlayManual();
-  else startPlayAuto();
-}
-
-autoToggle.addEventListener("click", toggleAuto);
-autoToggle.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" || e.key === " ") {
-    e.preventDefault();
-    toggleAuto();
-  }
-});
-
-document.getElementById("btnStopPlay").addEventListener("click", () => {
-  stopPlay();
-  boardLabel.textContent = autoMode ? "AUTO_RUNNING" : "CLICK_TO_TRIGGER";
-});
-
-function setActiveButton(activeId) {
-  ["btnSweep", "btnPulse", "btnChaos", "btnBeat", "btnStairs"].forEach((id) => {
-    const b = document.getElementById(id);
-    if (!b) return;
-    if (id === activeId) b.classList.remove("btn-ghost");
-    else b.classList.add("btn-ghost");
-  });
-}
-
-document.getElementById("btnSweep").addEventListener("click", () => {
-  setMode("SWEEP");
-  setActiveButton("btnSweep");
-  if (autoMode) startPlayAuto();
-});
-document.getElementById("btnPulse").addEventListener("click", () => {
-  setMode("PULSE");
-  setActiveButton("btnPulse");
-  if (autoMode) startPlayAuto();
-});
-document.getElementById("btnChaos").addEventListener("click", () => {
-  setMode("CHAOS");
-  setActiveButton("btnChaos");
-  if (autoMode) startPlayAuto();
-});
-document.getElementById("btnBeat").addEventListener("click", () => {
-  setMode("HEARTBEAT");
-  setActiveButton("btnBeat");
-  if (autoMode) startPlayAuto();
-});
-document.getElementById("btnStairs").addEventListener("click", () => {
-  setMode("STAIRS");
-  setActiveButton("btnStairs");
-  if (autoMode) startPlayAuto();
-});
-
-document.querySelectorAll("[data-speed]").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    setSpeed(btn.getAttribute("data-speed"));
-    document.querySelectorAll("[data-speed]").forEach((b) => b.classList.add("btn-ghost"));
-    btn.classList.remove("btn-ghost");
-  });
-});
-
-board.addEventListener("click", () => {
-  if (!autoMode) {
-    runCurrentPattern();
-    setTimeout(stopPlay, 1800);
-  }
-  heroGlyphBurst();
-});
 
 // Copy email
 const copyBtn = document.getElementById("copyEmailBtn");
@@ -756,15 +575,34 @@ function initTypewriter() {
   cycle();
 }
 
+// Scroll Animation Observer
+const observerOptions = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.widget').forEach(widget => {
+  if (!widget.classList.contains('hero-widget')) {
+    widget.classList.add('fade-in-section');
+    observer.observe(widget);
+  }
+});
+
 window.addEventListener("load", () => {
+  document.body.classList.add('page-loaded');
+
   runGlyphSequence();
   startHeroAutoplay();
 
-  setSpeed("med");
-  setMode("SWEEP");
-  setActiveButton("btnSweep");
-
-  startPlayAuto();
   setActiveByScroll();
   setTimeout(triggerNavGlyphs, 500);
 
@@ -773,6 +611,8 @@ window.addEventListener("load", () => {
 
   setInterval(loadGitHub, 10 * 60 * 1000);
 });
+
+
 
 
 // Work controls: search + sort (uses cached repos if available)
