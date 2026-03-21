@@ -1664,3 +1664,43 @@ footer {
 .work-card-inner:hover{
   transform: translateY(-3px);
 }
+
+/* ================================= */
+/* Scroll and Page Load Animations   */
+/* ================================= */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Base Page Load states */
+body:not(.page-loaded) #mainNav {
+  transform: translate(-50%, -20px);
+  opacity: 0;
+}
+
+body:not(.page-loaded) .hero-widget {
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+}
+
+body.page-loaded #mainNav {
+  transform: translate(-50%, 0);
+  opacity: 1;
+  transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s, opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s;
+}
+
+body.page-loaded .hero-widget {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s, transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s;
+}
+
+
