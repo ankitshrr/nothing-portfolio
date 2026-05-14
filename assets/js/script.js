@@ -126,6 +126,15 @@ function setActiveByScroll() {
   document.querySelectorAll(".nav-link").forEach((a) => {
     a.classList.toggle("active", a.getAttribute("href") === `#${currentId}`);
   });
+
+  // Scroll Progress Bar calculation
+  const scrollProgress = document.getElementById("scrollProgress");
+  if (scrollProgress) {
+    const totalScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollVal = windowHeight > 0 ? (totalScroll / windowHeight) * 100 : 0;
+    scrollProgress.style.width = scrollVal + "%";
+  }
 }
 window.addEventListener("scroll", setActiveByScroll, { passive: true });
 
@@ -582,10 +591,13 @@ const observerOptions = {
   threshold: 0.1
 };
 
-const observer = new IntersectionObserver((entries, observer) => {
+const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
+    } else {
+      // Remove visible class to repeat animation when scrolling back
+      entry.target.classList.remove('visible');
     }
   });
 }, observerOptions);
@@ -594,6 +606,14 @@ document.querySelectorAll('.widget').forEach(widget => {
   if (!widget.classList.contains('hero-widget')) {
     widget.classList.add('fade-in-section');
     observer.observe(widget);
+    
+    // Stagger inner elements within this widget
+    const inners = widget.querySelectorAll('.timeline-item, .skill-group, .contact-card, .about-photo-container, .work-card-inner');
+    inners.forEach((el, index) => {
+      el.classList.add('fade-in-section');
+      el.style.transitionDelay = `${(index + 1) * 0.12}s`;
+      observer.observe(el);
+    });
   }
 });
 

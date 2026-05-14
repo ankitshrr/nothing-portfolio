@@ -23,6 +23,7 @@
   </head>
 
   <body>
+    <div id="scrollProgress"></div>
     <div class="nt-canvas"></div>
 
     <nav id="mainNav" aria-label="Primary navigation">
@@ -130,6 +131,30 @@
               <div class="about-links">
                 <a
                   class="btn-system btn-ghost btn-mini"
+                  href="assets/resume.pdf"
+                  target="_blank"
+                  rel="noopener"
+                  download
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                  Resume
+                </a>
+
+                <a
+                  class="btn-system btn-ghost btn-mini"
                   href="https://github.com/ankitshrr"
                   target="_blank"
                   rel="noopener"
@@ -186,7 +211,7 @@
             <div class="about-photo-container" aria-label="Profile photo">
               <div class="corner-mark corner-tl"></div>
               <div class="corner-mark corner-br"></div>
-              <img src="assets/img/ankit.jpg" alt="Profile" />
+              <img src="assets/img/ankit.png" alt="Profile" />
             </div>
           </div>
         </section>
@@ -432,32 +457,47 @@
           </div>
         </section>
 
-        <!-- FOOTER -->
-        <footer>
-          <div class="footer-left">
-            <div class="footer-strong">
-              ANKIT_SHR // SOFTWARE_QUALITY_INTERFACE_V3.0
+        <!-- PREMIUM FOOTER -->
+        <footer class="widget premium-footer" style="padding: 40px; display: flex; flex-direction: column; gap: 40px;">
+          <div class="footer-top" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
+            <div class="footer-brand" style="display: flex; flex-direction: column; gap: 10px;">
+              <h2 class="hero-title" style="font-size: clamp(28px, 4vw, 42px); margin-bottom: 0;">
+                <span class="dot-matrix" style="font-size: 0.6em; margin-bottom: 5px;">SYSTEM_OFFLINE // JK</span>
+                ANKIT SHRESTHA
+              </h2>
+              <div class="status-tag" style="margin-bottom: 0;">
+                <span class="red-dot"></span>
+                STATUS // <span style="color: var(--text-main);">READY_FOR_WORK</span>
+              </div>
             </div>
-            <div>
-              © <span id="yearNow">2026</span>
-              <span class="footer-strong">Ankit Shrestha</span>. Built by
-              <a
-                class="footer-link"
-                href="https://github.com/ankitshrr"
-                target="_blank"
-                rel="noopener"
-                >ankitshrr</a
-              >.
-            </div>
-            <div class="legal">
-              This is a personal portfolio UI. “Nothing OS / Glyph” style is
-              used as design inspiration only. No affiliation with Nothing
-              Technology Limited.
+            
+            <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+              <div class="footer-links-col" style="display: flex; flex-direction: column; gap: 8px;">
+                <span class="label" style="margin-bottom: 4px;">INDEX</span>
+                <a href="#home" class="footer-link">Home</a>
+                <a href="#about" class="footer-link">About</a>
+                <a href="#work" class="footer-link">Work</a>
+              </div>
+              <div class="footer-links-col" style="display: flex; flex-direction: column; gap: 8px;">
+                <span class="label" style="margin-bottom: 4px;">SOCIALS</span>
+                <a href="https://github.com/ankitshrr" target="_blank" rel="noopener" class="footer-link">GitHub</a>
+                <a href="https://linkedin.com/in/ankitshrr" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+                <a href="mailto:ankitprogressx@gmail.com" class="footer-link">Email</a>
+              </div>
             </div>
           </div>
-          <div class="footer-right">
-            <span>DESIGNED_IN_KATHMANDU</span>
-            <span>BUILD: <span id="buildStamp">LIVE</span></span>
+
+          <div class="divider" style="height: 1px; background: var(--glass-border); width: 100%;"></div>
+
+          <div class="footer-bottom" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted);">
+            <div class="footer-legal" style="max-width: 400px; line-height: 1.5;">
+              <span style="color: var(--text-main);">© <span id="yearNow">2026</span> Ankit Shrestha.</span><br>
+              This is a personal portfolio. “Nothing OS” style is used as design inspiration only. No affiliation with Nothing Technology Limited.
+            </div>
+            <div class="footer-stamp" style="display: flex; flex-direction: column; text-align: right; gap: 4px;">
+              <span>DESIGNED_IN_KATHMANDU</span>
+              <span>BUILD // <span id="buildStamp" style="color: var(--text-main);">LIVE</span></span>
+            </div>
           </div>
         </footer>
       </div>
