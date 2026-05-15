@@ -433,7 +433,7 @@ function applyWorkFilters(repos) {
   const q = (document.getElementById("repoSearch")?.value || "").trim().toLowerCase();
   const sort = document.getElementById("repoSort")?.value || "updated";
 
-  let list = (Array.isArray(repos) ? repos : []).filter((r) => !r.fork);
+  let list = (Array.isArray(repos) ? repos : []).filter((r) => !r.fork && r.language);
 
   if (q) {
     list = list.filter((r) => {
