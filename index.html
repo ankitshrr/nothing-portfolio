@@ -23,6 +23,20 @@
   </head>
 
   <body>
+    <!-- PRELOADER -->
+    <div id="preloader" class="preloader">
+      <div class="loader-content">
+        <div class="loader-logo">ANKIT<span class="red-dot" style="display:inline-block; margin-left:4px;"></span></div>
+        <div class="loader-text">
+          <div class="loader-text-inner">Initializing System...</div>
+        </div>
+        <div class="loader-counter"><span id="loaderPercent">0</span>%</div>
+      </div>
+      <div class="loader-progress-bar">
+        <div class="loader-progress-fill" id="loaderFill"></div>
+      </div>
+    </div>
+
     <div id="scrollProgress"></div>
     <div class="nt-canvas"></div>
 
@@ -38,7 +52,6 @@
         <a href="#about" class="nav-link active">About</a>
         <a href="#skills" class="nav-link">Skills</a>
         <a href="#work" class="nav-link">My Work</a>
-        <a href="#experience" class="nav-link">Learning</a>
         <a href="#contact" class="nav-link">Contact</a>
       </div>
 
@@ -90,18 +103,16 @@
           <div class="hero-content">
             <div class="status-tag">
               <span class="red-dot"></span>
-              STATUS // <span id="status-text">INITIALIZING</span>
+              <span>Available for work</span>
             </div>
 
             <h1 class="hero-title">
               <span class="dot-matrix">ANKIT SHRESTHA</span>
-              MANUAL<br />QA + PYTHON.
+              SOFTWARE<br />DEVELOPER.
             </h1>
 
-            <p class="hero-desc">
-              I’m learning Manual QA and Python—focused on clean bug reports,
-              real user scenarios, and small scripts that make testing faster
-              and more reliable.
+            <p class="hero-desc split-text">
+              I am a developer exploring and improving my skills. I focus on writing clean code, building simple solutions, and continuously learning new technologies.
             </p>
 
             <div class="hero-actions">
@@ -110,7 +121,7 @@
             </div>
 
             <p class="hero-foot">
-              CURRENT_FOCUS: Manual Testing • Problem Solving • Prompt Engineering 
+              Current Focus: Web Development • Problem Solving • Programming
             </p>
           </div>
         </section>
@@ -121,11 +132,9 @@
           <div class="about-grid">
             <div class="about-text-container">
               <p class="about-desc">
-                I’m Ankit Shrestha, building my career in Quality Assurance.
-                Right now I’m learning Manual QA and strengthening Python
-                fundamentals. I enjoy breaking features (politely), writing
-                clear test cases, and documenting bugs with steps, expected vs
-                actual, and evidence.
+                I’m Ankit Shrestha, a developer building simple and effective applications.
+                Right now I’m exploring new development tools and strengthening my programming fundamentals. 
+                I enjoy writing clean code, solving problems, and continuously improving my skills.
               </p>
 
               <div class="about-links">
@@ -204,7 +213,7 @@
               </div>
 
               <p class="about-foot">
-                LOCATION: Kathmandu, Nepal • ROLE_TARGET: Junior QA / QA Intern
+                Location: Kathmandu, Nepal • Target Role: Junior Developer / Intern
               </p>
             </div>
 
@@ -218,142 +227,87 @@
 
         <!-- SKILLS -->
         <section class="widget skills-widget" id="skills">
-          <span class="label">Hardware & Software Skills</span>
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <span class="label" style="margin: 0;">Technical Skills</span>
+              <h2 style="font-size: clamp(24px, 4vw, 32px); margin: 8px 0 0; letter-spacing: -0.03em;">Tools & Technologies</h2>
+            </div>
+          </div>
 
-          <div class="skill-groups">
-            <div class="skill-group">
-              <div class="sg-head">
-                <div class="sg-title-wrap">
-                  <div class="sg-icon">
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path
-                        d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
-                      />
-                    </svg>
-                  </div>
-                  <div class="sg-title">Tools</div>
-                </div>
-                <div class="sg-tag">CURRENT</div>
+          <div class="skills-grid">
+            <!-- Programming -->
+            <div class="skill-category">
+              <div class="sc-header">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                <h3>Programming</h3>
               </div>
-              <div class="pill-row">
-                <span class="pill live"
-                  ><span class="pill-dot"></span> Git</span
-                >
-                <span class="pill live"
-                  ><span class="pill-dot"></span> GitHub</span
-                >
-                <span class="pill live"><span class="pill-dot"></span> VS Code</span>
-              </div>
-              <div class="skill-note">
-                Clean repos and simple workflows for portfolio management.
+              <div class="sc-tags">
+                <span class="sc-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"> Python</span>
+                <span class="sc-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"> JavaScript</span>
+                <span class="sc-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML"> HTML</span>
+                <span class="sc-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS"> CSS</span>
               </div>
             </div>
 
-            <div class="skill-group">
-              <div class="sg-head">
-                <div class="sg-title-wrap">
-                  <div class="sg-icon">
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <polyline points="16 18 22 12 16 6" />
-                      <polyline points="8 6 2 12 8 18" />
-                    </svg>
-                  </div>
-                  <div class="sg-title">Programming</div>
-                </div>
-                <div class="sg-tag">CURRENT</div>
+            <!-- Development -->
+            <div class="skill-category">
+              <div class="sc-header">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                <h3>Development & Design</h3>
               </div>
-              <div class="pill-row">
-                <span class="pill live"><span class="pill-dot"></span> Python</span>
-                <span class="pill live"><span class="pill-dot"></span> JavaScript</span>
-                <span class="pill live"><span class="pill-dot"></span> Selenium</span>
-                <span class="pill live"><span class="pill-dot"></span> HTML/CSS</span>
-              </div>
-              <div class="skill-note">
-                Automation with Selenium + Python/JS, and web fundamentals.
+              <div class="sc-tags">
+                <span class="sc-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux"> Linux</span>
+                <span class="sc-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker"> Docker</span>
+                <span class="sc-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" alt="Jenkins"> Jenkins</span>
+                <span class="sc-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" alt="Photoshop"> Photoshop</span>
               </div>
             </div>
 
-            <div class="skill-group">
-              <div class="sg-head">
-                <div class="sg-title-wrap">
-                  <div class="sg-icon">
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                    </svg>
-                  </div>
-                  <div class="sg-title">Manual QA</div>
-                </div>
-                <div class="sg-tag">ACTIVE</div>
+            <!-- Tools -->
+            <div class="skill-category">
+              <div class="sc-header">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                <h3>Tools</h3>
               </div>
-              <div class="pill-row">
-                <span class="pill live"><span class="pill-dot"></span> Test Cases</span>
-                <span class="pill live"><span class="pill-dot"></span> Bug Reports</span>
-                <span class="pill live"><span class="pill-dot"></span> Exploratory</span>
-                <span class="pill live"><span class="pill-dot"></span> SDLC</span>
-              </div>
-              <div class="skill-note">
-                User-first testing with detailed documentation and evidence.
+              <div class="sc-tags">
+                <span class="sc-tag"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.022A9.606 9.606 0 0112 6.82c.85.004 1.705.114 2.504.336 1.909-1.29 2.747-1.022 2.747-1.022.546 1.379.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"></path></svg> GitHub</span>
+                <span class="sc-tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code"> VS Code</span>
               </div>
             </div>
-
-
           </div>
         </section>
 
         <!-- MY WORK -->
         <section class="widget projects-widget" id="work">
-          <span class="label">My Work</span>
-
-          <div class="play-chips" style="margin-top: 10px">
-            <span class="chip">USER: <b id="ghUser">@ankitshrr</b></span>
-            <span class="chip">REPOS: <b id="ghRepoCount">--</b></span>
-            <span class="chip">FOLLOWERS: <b id="ghFollowers">--</b></span>
-            <span class="chip">STATUS: <b id="ghStatus">LOADING</b></span>
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <span class="label" style="margin: 0;">My Work</span>
+              <h2 style="font-size: clamp(24px, 4vw, 32px); margin: 8px 0 0; letter-spacing: -0.03em;">Featured Projects</h2>
+            </div>
+            <div style="color: var(--text-dim); font-size: 12px; font-family: 'JetBrains Mono', monospace; background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 999px; border: 1px solid var(--glass-border);">
+              Swipe to explore →
+            </div>
           </div>
 
-          <div class="divider"></div>
+          <!-- Hidden Old UI to preserve JavaScript functionality without affecting other code -->
+          <div style="display: none;">
+            <div class="play-chips" style="margin-top: 10px">
+              <span class="chip">GitHub: <b id="ghUser">@ankitshrr</b></span>
+              <span class="chip">Repositories: <b id="ghRepoCount">--</b></span>
+              <span class="chip">Followers: <b id="ghFollowers">--</b></span>
+              <span class="chip">Status: <b id="ghStatus">Loading...</b></span>
+            </div>
 
-          <div
-            class="work-controls"
-            style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px"
-          >
-            <input
-              id="repoSearch"
-              class="work-input"
-              placeholder="Search projects..."
-            />
-            <select id="repoSort" class="work-input">
-              <option value="updated">Sort: Recently updated</option>
-              <option value="stars">Sort: Most stars</option>
-              <option value="name">Sort: Name (A-Z)</option>
-            </select>
+            <div class="divider"></div>
+
+            <div class="work-controls" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px">
+              <input id="repoSearch" class="work-input" placeholder="Search projects..." />
+              <select id="repoSort" class="work-input">
+                <option value="updated">Sort: Recently updated</option>
+                <option value="stars">Sort: Most stars</option>
+                <option value="name">Sort: Name (A-Z)</option>
+              </select>
+            </div>
           </div>
 
           <!-- Optional: project overrides (custom title/image/demo/pinned per repo name) -->
@@ -379,124 +333,82 @@
           <div class="projects-container" id="ghRepos"></div>
         </section>
 
-        <!-- LEARNING -->
-        <section class="widget experience-widget" id="experience">
-          <span class="label">Learning</span>
-
-          <div class="timeline-item">
-            <span class="date">FEB 1, 2026 — PRESENT</span>
-            <h4>Manual QA + Problem Solving</h4>
-            <p class="section-desc">
-              Practicing manual testing daily: writing test cases, finding edge
-              cases, improving bug reporting, and solving problems with a
-              structured approach.
-            </p>
-          </div>
-
-          <div class="timeline-item">
-            <span class="date">2025</span>
-            <h4>Git & GitHub Foundations</h4>
-            <p class="section-desc">
-              Learned repo basics, README structure, licensing, .gitignore, and
-              maintaining a clean portfolio repo.
-            </p>
-          </div>
-        </section>
-
         <!-- CONTACT -->
-        <section class="widget contact-widget" id="contact">
-          <span class="label">Contact</span>
-
-          <div class="contact-header">
-            <div>
-              <h2 class="contact-title">Let’s connect.</h2>
-              <p class="contact-sub">Junior QA / QA Intern roles.</p>
-              <div class="status-line">
-                <span class="chip"
-                  ><span class="red-dot"></span> AVAILABLE</span
-                >
-                <span class="chip">ROLE: <b>JUNIOR QA</b></span>
-                <span class="chip">LOCATION: <b>KATHMANDU</b></span>
-              </div>
-            </div>
-
-            <div class="contact-right">
-              <div class="mono">Gmail</div>
-              <div class="contact-actions">
-                <a
-                  href="mailto:ankitprogressx@gmail.com"
-                  class="btn-system btn-mini"
-                  >ankitprogressx@gmail.com</a
-                >
-                <button class="btn-system btn-mini btn-ghost" id="copyEmailBtn">
-                  Copy
-                </button>
-              </div>
-              <div id="copyToast" class="mono copy-toast">COPIED ✅</div>
-            </div>
+        <section class="widget contact-widget" id="contact" style="text-align: center; padding: 80px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <div class="status-tag" style="margin-bottom: 24px;">
+            <span class="red-dot"></span>
+            <span>Available for Opportunities</span>
           </div>
+          
+          <h2 style="font-size: clamp(36px, 6vw, 56px); line-height: 1.1; margin: 0 0 16px; letter-spacing: -0.04em; font-weight: 800;">
+            Let’s build something <br><span style="color: var(--text-dim);">together.</span>
+          </h2>
+          
+          <p style="color: var(--text-dim); max-width: 480px; margin: 0 0 40px; font-size: 16px; line-height: 1.6;">
+            I'm currently looking for Junior Developer or Internship roles. My inbox is always open for new opportunities or just to say hi!
+          </p>
 
-          <div class="contact-card">
-            <div class="mono">Links</div>
-            <div class="contact-links">
-              <a
-                class="btn-system btn-mini btn-ghost"
-                href="https://github.com/ankitshrr"
-                target="_blank"
-                rel="noopener"
-                >GitHub: @ankitshrr</a
-              >
-              <a
-                class="btn-system btn-mini btn-ghost"
-                href="https://linkedin.com/in/ankitshrr"
-                target="_blank"
-                rel="noopener"
-                >LinkedIn: /in/ankitshrr</a
-              >
-            </div>
+          <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-bottom: 24px;">
+            <a href="mailto:ankitprogressx@gmail.com" class="btn-system" style="padding: 16px 32px; font-size: 14px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              Send an Email
+            </a>
+            <button class="btn-system btn-ghost" id="copyEmailBtn" style="padding: 16px 24px; font-size: 14px;">
+              Copy Address
+            </button>
+          </div>
+          
+          <div id="copyToast" class="mono copy-toast" style="margin-bottom: 32px; color: var(--text-main); font-weight: 700;">EMAIL COPIED ✅</div>
+
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+            <a class="chip" href="https://github.com/ankitshrr" target="_blank" rel="noopener" style="padding: 12px 20px; font-size: 13px; text-decoration: none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              <b>GitHub</b>
+            </a>
+            <a class="chip" href="https://linkedin.com/in/ankitshrr" target="_blank" rel="noopener" style="padding: 12px 20px; font-size: 13px; text-decoration: none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              <b>LinkedIn</b>
+            </a>
           </div>
         </section>
 
         <!-- PREMIUM FOOTER -->
-        <footer class="widget premium-footer" style="padding: 40px; display: flex; flex-direction: column; gap: 40px;">
-          <div class="footer-top" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
-            <div class="footer-brand" style="display: flex; flex-direction: column; gap: 10px;">
-              <h2 class="hero-title" style="font-size: clamp(28px, 4vw, 42px); margin-bottom: 0;">
-                <span class="dot-matrix" style="font-size: 0.6em; margin-bottom: 5px;">SYSTEM_OFFLINE // JK</span>
-                ANKIT SHRESTHA
-              </h2>
-              <div class="status-tag" style="margin-bottom: 0;">
+        <footer class="widget premium-footer">
+          <div class="pf-top">
+            <div class="pf-brand">
+              <h2>Ankit Shrestha</h2>
+              <div class="status-tag">
                 <span class="red-dot"></span>
-                STATUS // <span style="color: var(--text-main);">READY_FOR_WORK</span>
+                <span>Software Developer • Available for work</span>
               </div>
             </div>
             
-            <div style="display: flex; gap: 40px; flex-wrap: wrap;">
-              <div class="footer-links-col" style="display: flex; flex-direction: column; gap: 8px;">
-                <span class="label" style="margin-bottom: 4px;">INDEX</span>
-                <a href="#home" class="footer-link">Home</a>
-                <a href="#about" class="footer-link">About</a>
-                <a href="#work" class="footer-link">Work</a>
+            <div class="pf-links">
+              <div class="pf-col">
+                <span class="label">INDEX</span>
+                <a href="#home" class="pf-link">Home</a>
+                <a href="#about" class="pf-link">About</a>
+                <a href="#work" class="pf-link">Work</a>
               </div>
-              <div class="footer-links-col" style="display: flex; flex-direction: column; gap: 8px;">
-                <span class="label" style="margin-bottom: 4px;">SOCIALS</span>
-                <a href="https://github.com/ankitshrr" target="_blank" rel="noopener" class="footer-link">GitHub</a>
-                <a href="https://linkedin.com/in/ankitshrr" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
-                <a href="mailto:ankitprogressx@gmail.com" class="footer-link">Email</a>
+              <div class="pf-col">
+                <span class="label">SOCIALS</span>
+                <a href="https://github.com/ankitshrr" target="_blank" rel="noopener" class="pf-link">GitHub</a>
+                <a href="https://linkedin.com/in/ankitshrr" target="_blank" rel="noopener" class="pf-link">LinkedIn</a>
+                <a href="mailto:ankitprogressx@gmail.com" class="pf-link">Email</a>
               </div>
             </div>
           </div>
 
-          <div class="divider" style="height: 1px; background: var(--glass-border); width: 100%;"></div>
+          <div class="divider pf-divider"></div>
 
-          <div class="footer-bottom" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted);">
-            <div class="footer-legal" style="max-width: 400px; line-height: 1.5;">
-              <span style="color: var(--text-main);">© <span id="yearNow">2026</span> Ankit Shrestha.</span><br>
-              This is a personal portfolio. “Nothing OS” style is used as design inspiration only. No affiliation with Nothing Technology Limited.
+          <div class="pf-bottom">
+            <div class="pf-copy">
+              <span>© <span id="yearNow">2026</span> Ankit Shrestha.</span> All rights reserved.<br>
+              This is a personal portfolio. “Nothing OS” style is used as design inspiration only.
             </div>
-            <div class="footer-stamp" style="display: flex; flex-direction: column; text-align: right; gap: 4px;">
-              <span>DESIGNED_IN_KATHMANDU</span>
-              <span>BUILD // <span id="buildStamp" style="color: var(--text-main);">LIVE</span></span>
+            <div class="pf-status">
+              <span>Designed in Kathmandu</span>
+              <span>Status: <span id="buildStamp" class="pf-live">Live</span></span>
             </div>
           </div>
         </footer>

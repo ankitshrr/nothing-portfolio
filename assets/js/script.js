@@ -391,32 +391,24 @@ function repoCard(repo, langs) {
     : "";
 
   return `
-    <div class="work-card-inner" onclick="triggerGlyph(this)">
-      <span class="label">REPO</span>
-
+    <div class="work-card-inner">
       <div class="project-img-container">
-        <div class="p-glyph pg-arc"></div><div class="p-glyph pg-bar"></div><div class="p-glyph pg-dot"></div>
         <img src="${img}" alt="${title}" loading="lazy"
           onerror="this.onerror=null; this.src='${fallbackImg}';" />
       </div>
 
-      <h3 style="word-break:break-word">${title}</h3>
-      ${desc ? `<p class="card-desc">${desc}</p>` : ``}
+      <div class="work-card-content">
+        <h3 style="word-break:break-word; margin-bottom: 8px; font-size: 20px;">${title}</h3>
+        ${desc ? `<p class="card-desc" style="margin-bottom: 16px;">${desc}</p>` : ``}
 
-      <div class="lang-row">
-        ${langHTML}
-      </div>
+        <div class="lang-row">
+          ${langHTML}
+        </div>
 
-      <div class="meta-row" aria-label="Project meta">
-        <span class="chip" title="Last updated"><b>${updated}</b></span>
-        <span class="chip" title="Stars"><b>${stars}</b></span>
-        <span class="chip" title="Forks"><b>${forks}</b></span>
-      </div>
-
-      <div class="card-actions">
-        ${demoBtn}
-        <a href="${url}" target="_blank" rel="noopener" class="btn-system btn-ghost btn-tiny">Open Repo</a>
-        <a href="https://github.com/${GH_USERNAME}" target="_blank" rel="noopener" class="btn-system btn-ghost btn-tiny">Profile</a>
+        <div class="card-actions" style="margin-top: 20px;">
+          ${demoBtn}
+          <a href="${url}" target="_blank" rel="noopener" class="btn-system btn-ghost btn-tiny">GitHub Repo</a>
+        </div>
       </div>
     </div>
   `;
@@ -465,7 +457,7 @@ function renderGitHub(user, repos) {
   ghUserEl.textContent = `@${GH_USERNAME}`;
   ghRepoCountEl.textContent = user?.public_repos ?? "--";
   ghFollowersEl.textContent = user?.followers ?? "--";
-  ghStatusEl.textContent = "LIVE";
+  ghStatusEl.textContent = "Active";
 
   const visible = applyWorkFilters(repos);
 
@@ -505,10 +497,10 @@ async function loadGitHub() {
   // 1) Try cache first
   const cache = loadRepoCache();
   if (cache.user && Array.isArray(cache.repos) && cache.repos.length) {
-    ghStatusEl.textContent = cache.fresh ? "CACHED" : "STALE";
+    ghStatusEl.textContent = cache.fresh ? "Cached" : "Stale";
     renderGitHub(cache.user, cache.repos);
   } else {
-    ghStatusEl.textContent = "LOADING";
+    ghStatusEl.textContent = "Loading...";
   }
 
   // 2) Refresh live
@@ -519,7 +511,7 @@ async function loadGitHub() {
   } catch (err) {
     const msg = (err && err.message) || "ERROR";
     const rateLimited = msg === "RATE_LIMIT";
-    ghStatusEl.textContent = rateLimited ? "RATE_LIMIT" : "ERROR";
+    ghStatusEl.textContent = rateLimited ? "Rate Limited" : "Error";
 
     const cache2 = loadRepoCache();
     const hasCache = cache2.user && Array.isArray(cache2.repos) && cache2.repos.length;
@@ -540,49 +532,7 @@ async function loadGitHub() {
   }
 }
 
-// Typewriter
-function initTypewriter() {
-  const target = document.getElementById("status-text");
-  const phrases = [
-    "Okay",
-  "Here",
-  "Now",
-  "Fine",
-  "Ready",
-  ];
-
-  let i = 0;
-  let j = 0;
-  let isDeleting = false;
-  let speed = 80;
-
-  function cycle() {
-    const fullText = phrases[i];
-
-    if (isDeleting) {
-      target.textContent = fullText.substring(0, j - 1);
-      j--;
-      speed = 40;
-    } else {
-      target.textContent = fullText.substring(0, j + 1);
-      j++;
-      speed = 80;
-    }
-
-    if (!isDeleting && j === fullText.length) {
-      isDeleting = true;
-      speed = 2000;
-    } else if (isDeleting && j === 0) {
-      isDeleting = false;
-      i = (i + 1) % phrases.length;
-      speed = 500;
-    }
-
-    setTimeout(cycle, speed);
-  }
-
-  cycle();
-}
+// Typewriter removed
 
 // Scroll Animation Observer
 const observerOptions = {
@@ -608,7 +558,7 @@ document.querySelectorAll('.widget').forEach(widget => {
     observer.observe(widget);
     
     // Stagger inner elements within this widget
-    const inners = widget.querySelectorAll('.timeline-item, .skill-group, .contact-card, .about-photo-container, .work-card-inner');
+    const inners = widget.querySelectorAll('.timeline-item, .skill-category, .contact-card, .about-photo-container, .work-card-inner');
     inners.forEach((el, index) => {
       el.classList.add('fade-in-section');
       el.style.transitionDelay = `${(index + 1) * 0.12}s`;
@@ -618,16 +568,42 @@ document.querySelectorAll('.widget').forEach(widget => {
 });
 
 window.addEventListener("load", () => {
-  document.body.classList.add('page-loaded');
+  document.body.classList.add('loading');
+  
+  let loadPercent = 0;
+  const loaderPercentEl = document.getElementById('loaderPercent');
+  const loaderFillEl = document.getElementById('loaderFill');
+  const preloader = document.getElementById('preloader');
 
-  runGlyphSequence();
-  startHeroAutoplay();
-
-  setActiveByScroll();
-  setTimeout(triggerNavGlyphs, 500);
+  // Simple interval to simulate loading percentage
+  const loadInterval = setInterval(() => {
+    loadPercent += Math.floor(Math.random() * 15) + 5;
+    if (loadPercent >= 100) {
+      loadPercent = 100;
+      clearInterval(loadInterval);
+      
+      if(loaderPercentEl) loaderPercentEl.textContent = loadPercent;
+      if(loaderFillEl) loaderFillEl.style.width = loadPercent + '%';
+      
+      setTimeout(() => {
+        if(preloader) preloader.classList.add('hidden');
+        document.body.classList.remove('loading');
+        document.body.classList.add('page-loaded');
+        
+        runGlyphSequence();
+        startHeroAutoplay();
+        
+        setActiveByScroll();
+        setTimeout(triggerNavGlyphs, 500);
+      }, 600); // Hold at 100% for a moment before fading
+    } else {
+      if(loaderPercentEl) loaderPercentEl.textContent = loadPercent;
+      if(loaderFillEl) loaderFillEl.style.width = loadPercent + '%';
+    }
+  }, 80);
 
   loadGitHub();
-  initTypewriter();
+  // Typewriter removed
 
   setInterval(loadGitHub, 10 * 60 * 1000);
 });
@@ -645,4 +621,78 @@ document.addEventListener("DOMContentLoaded", () => {
       if (cache.user && Array.isArray(cache.repos)) renderGitHub(cache.user, cache.repos);
     });
   });
+});
+
+// ==========================================
+// BONUS TECHNIQUES: LERP, MAP RANGE, TEXT SPLITTING
+// ==========================================
+
+// 1. Lerp & Map Range for Smooth Scroll Progress
+function lerp(start, end, amt) {
+  return (1 - amt) * start + amt * end;
+}
+
+let currentScroll = 0;
+let targetScroll = 0;
+
+function renderSmoothScroll() {
+  targetScroll = window.scrollY;
+  // Lerp towards target scroll
+  currentScroll = lerp(currentScroll, targetScroll, 0.08);
+  
+  const maxScroll = document.body.scrollHeight - window.innerHeight;
+  // Map range from scroll distance to 0-100 percentage
+  let progress = maxScroll > 0 ? (currentScroll / maxScroll) * 100 : 0;
+  
+  const progressBar = document.getElementById('scrollProgress');
+  if (progressBar) {
+    progressBar.style.width = `${progress}%`;
+  }
+  
+  requestAnimationFrame(renderSmoothScroll);
+}
+requestAnimationFrame(renderSmoothScroll);
+
+// 2. Text Splitting & Viewport Detection
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('.split-text').forEach((el) => {
+    // Save original text and clear element
+    const text = el.innerText;
+    el.innerHTML = '';
+    
+    // Split into words
+    const words = text.trim().split(/\s+/);
+    words.forEach((word, wordIndex) => {
+      const wordSpan = document.createElement('span');
+      wordSpan.className = 'split-word';
+      
+      // Split into characters
+      const chars = word.split('');
+      chars.forEach((char, charIndex) => {
+        const charSpan = document.createElement('span');
+        charSpan.className = 'split-char';
+        charSpan.textContent = char;
+        
+        // Easing / Stagger calculation
+        // Adds delay sequentially per character
+        charSpan.style.transitionDelay = `${(wordIndex * 2 + charIndex) * 20}ms`;
+        wordSpan.appendChild(charSpan);
+      });
+      
+      el.appendChild(wordSpan);
+      // Add space between words
+      el.appendChild(document.createTextNode(' '));
+    });
+  });
+
+  // Viewport detection to trigger text split animation
+  const splitObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.split-text').forEach(el => splitObserver.observe(el));
 });
