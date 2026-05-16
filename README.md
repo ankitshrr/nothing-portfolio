@@ -1,4 +1,4 @@
-# Nothing-portfolio 
+# Nothing-portfolio
 
 A minimalist personal portfolio website inspired by **Nothing OS** aesthetics — clean UI, monochrome palette, subtle grid, and glyph-style interactions.
 This project is built to showcase my learning journey in **Web Fundamentals**, **Prompt Engineering**, and human-AI collaborative coding.
@@ -24,8 +24,6 @@ nothing-portfolio/
 │     └─ Fav.ico
 ├─ LICENSE
 └─ README.md
-
-
 ```
 
 ---
@@ -34,16 +32,29 @@ nothing-portfolio/
 
 - **Dark / Light theme toggle** (CSS variables + `data-theme`)
 - **Glass + dotted background** UI
-- **Animated NAV “glyph” effect**
+- **Animated NAV "glyph" effect**
 - **Hero glyph system** with autoplay + click burst
 - **Responsive mobile navigation** (hamburger / expand)
-- **GitHub tracker**
-  - Fetches profile + latest repos
+- **Page preloader** — animated counter + progress bar on initial load
+- **Scroll reveal animations** — sections fade in as you scroll
+- **GitHub Activity Graph**
+  - Pac-Man contribution graph (auto-updated via GitHub Actions)
+  - Live stats: Total Contributions, Best Day, Current Streak
+  - Fetched from GitHub Contributions API
+- **GitHub Project Tracker**
+  - Fetches profile + latest repos via GitHub REST API
   - LocalStorage cache (repos + languages)
-  - Repo cards with OpenGraph preview images
+  - Language breakdown strips per project card
 - **Contact section**
-  - Mailto button
-  - Copy email with toast
+  - Smart email button — opens Gmail on PC, native mail app on mobile
+  - Pre-filled subject & body for convenience
+  - Copy email address with toast notification
+  - WhatsApp direct link
+  - GitHub & LinkedIn quick links
+- **Premium Footer**
+  - INDEX & SOCIALS columns with smooth hover arrow animations
+  - Monospace typewriter font for links
+
 ---
 
 ## 🛠️ Built With
@@ -52,6 +63,7 @@ nothing-portfolio/
 - **CSS3** (custom variables, glassmorphism, animations)
 - **JavaScript (Vanilla)**
 - **GitHub REST API**
+- **GitHub Contributions API**
 - **LocalStorage caching**
 
 ---
@@ -72,7 +84,7 @@ It also serves as a personal portfolio to demonstrate **clean design thinking an
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/ankitshrr/nothing-portfolli.git
+   git clone https://github.com/ankitshrr/nothing-portfolio.git
    ```
 
 2. Open `index.html` in your browser
