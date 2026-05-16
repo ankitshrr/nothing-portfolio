@@ -696,3 +696,81 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll('.split-text').forEach(el => splitObserver.observe(el));
 });
+
+// ==========================================
+// PAC-MAN CONTRIBUTION GRAPH
+// ==========================================
+
+function generateMockContributions() {
+  const contributions = [];
+  const today = new Date();
+  // Seed so it looks natural: heavier mid-week, lighter weekends
+  for (let i = 364; i >= 0; i--) {
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    const dateStr = d.toISOString().slice(0, 10);
+    const dow = d.getDay(); // 0=Sun, 6=Sat
+    const isWeekend = dow === 0 || dow === 6;
+    const base = isWeekend ? 0.28 : 0.68;
+    const rand = Math.random();
+    let count = 0, level = 0;
+    if (rand < base) {
+      count = Math.floor(Math.random() * 14) + 1;
+      level = count <= 2 ? 1 : count <= 6 ? 2 : count <= 10 ? 3 : 4;
+    }
+    contributions.push({ date: dateStr, count, level });
+  }
+  return contributions;
+}
+
+
+
+async function initPacManGraph() {
+  const canvas = document.getElementById('pacCanvas');
+  if (!canvas) return;
+
+  const GH_USER = 'ankitshrr';
+  let contributions = [];
+
+  try {
+    const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${GH_USER}?y=last`, { signal: AbortSignal.timeout(5000) });
+    if (res.ok) { const data = await res.json(); contributions = data.contributions || []; }
+  } catch (_) {}
+
+  if (!contributions.length) contributions = generateMockContributions();
+
+  // ── Streak counter ──────────────────────────────────────────────
+  function prevDay(ds) { const d=new Date(ds); d.setDate(d.getDate()-1); return d.toISOString().slice(0,10); }
+  function calcStreak(cs) {
+    const sorted=[...cs].sort((a,b)=>b.date.localeCompare(a.date));
+    const todayStr=new Date().toISOString().slice(0,10);
+    let streak=0, expected=todayStr;
+    for(const c of sorted){
+      if(c.date>expected) continue;
+      if(c.date===expected){ if((c.count||0)>0){streak++;expected=prevDay(c.date);}else break; }
+      else break;
+    }
+    return streak;
+  }
+  const streak=calcStreak(contributions);
+  const streakEl=document.getElementById('pacStreak');
+  const streakChip=document.getElementById('pacStreakChip');
+  if(streakEl) streakEl.textContent = streak+'d';
+  if(streakChip && streak>0) streakChip.classList.add('streak-active');
+
+  // Stat chips
+  const total = contributions.reduce((s,c)=>s+(c.count||0),0);
+  const best  = contributions.reduce((m,c)=>c.count>m?c.count:m,0);
+  const totalEl=document.getElementById('pacTotalContrib');
+  const bestEl =document.getElementById('pacBestDay');
+  if(totalEl) totalEl.textContent=total.toLocaleString();
+  if(bestEl)  bestEl.textContent =best.toLocaleString();
+
+
+}
+
+// Kick off when page is loaded (called inside the existing load listener below)
+document.addEventListener('DOMContentLoaded', () => {
+  initPacManGraph();
+});
+
