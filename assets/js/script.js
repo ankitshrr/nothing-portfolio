@@ -726,9 +726,6 @@ function generateMockContributions() {
 
 
 async function initPacManGraph() {
-  const canvas = document.getElementById('pacCanvas');
-  if (!canvas) return;
-
   const GH_USER = 'ankitshrr';
   let contributions = [];
 
@@ -755,7 +752,7 @@ async function initPacManGraph() {
   const streak=calcStreak(contributions);
   const streakEl=document.getElementById('pacStreak');
   const streakChip=document.getElementById('pacStreakChip');
-  if(streakEl) streakEl.textContent = streak+'d';
+  if(streakEl) streakEl.textContent = streak > 0 ? streak+'d' : '0d';
   if(streakChip && streak>0) streakChip.classList.add('streak-active');
 
   // Stat chips

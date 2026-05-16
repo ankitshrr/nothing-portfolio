@@ -279,47 +279,59 @@
 
         <!-- PAC-MAN CONTRIBUTION GRAPH -->
         <section class="widget pac-contribution-widget scroll-reveal" id="contributions">
-          <div class="pac-widget-header">
+
+          <!-- Header row: label + GH link -->
+          <div class="pac-top-bar">
             <div>
               <span class="label">GitHub Activity</span>
               <h2 class="pac-widget-title">Contribution Graph</h2>
             </div>
-            <div class="pac-stats-row">
-              <div class="pac-stat-chip">
-                <span class="pac-stat-label">Total Contributions</span>
-                <span class="pac-stat-value" id="pacTotalContrib">—</span>
+            <a href="https://github.com/ankitshrr" target="_blank" rel="noopener" class="pac-gh-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.022A9.606 9.606 0 0112 6.82c.85.004 1.705.114 2.504.336 1.909-1.29 2.747-1.022 2.747-1.022.546 1.379.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>
+              @ankitshrr
+            </a>
+          </div>
+
+          <!-- Hero stat: Total Contributions -->
+          <div class="pac-hero-stat">
+            <div class="pac-hero-inner">
+              <span class="pac-hero-label">Total Contributions</span>
+              <span class="pac-hero-value" id="pacTotalContrib">—</span>
+            </div>
+            <!-- Secondary stats -->
+            <div class="pac-secondary-stats">
+              <div class="pac-sec-chip">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                <span class="pac-sec-label">Best Day</span>
+                <span class="pac-sec-value" id="pacBestDay">—</span>
               </div>
-              <div class="pac-stat-chip">
-                <span class="pac-stat-label">Best Day</span>
-                <span class="pac-stat-value" id="pacBestDay">—</span>
+              <div class="pac-sec-divider"></div>
+              <div class="pac-sec-chip" id="pacStreakChip">
+                <span class="pac-streak-icon">🔥</span>
+                <span class="pac-sec-label">Current Streak</span>
+                <span class="pac-sec-value" id="pacStreak">—</span>
               </div>
-              <div class="pac-stat-chip" id="pacStreakChip">
-                <span class="pac-stat-label">Current Streak 🔥</span>
-                <span class="pac-stat-value" id="pacStreak">—</span>
-              </div>
-              <a href="https://github.com/ankitshrr" target="_blank" rel="noopener" class="pac-gh-link">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.022A9.606 9.606 0 0112 6.82c.85.004 1.705.114 2.504.336 1.909-1.29 2.747-1.022 2.747-1.022.546 1.379.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>
-                @ankitshrr
-              </a>
             </div>
           </div>
 
-          <div style="width: 100%; overflow-x: auto; text-align: center; margin-bottom: 16px;">
-            <picture style="filter: hue-rotate(80deg) saturate(1.1) brightness(1.1);">
+          <!-- Graph -->
+          <div style="width: 100%; overflow-x: auto; text-align: center; margin-bottom: 12px;">
+            <picture>
               <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ankitshrr/ankitshrr/output/pacman-contribution-graph-dark.svg">
               <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ankitshrr/ankitshrr/output/pacman-contribution-graph.svg">
-              <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/ankitshrr/ankitshrr/output/pacman-contribution-graph.svg" style="max-width: 100%; display: block; margin: 0 auto;">
+              <img class="pacman-graph-img" alt="pacman contribution graph" src="https://raw.githubusercontent.com/ankitshrr/ankitshrr/output/pacman-contribution-graph-dark.svg">
             </picture>
           </div>
-          
-          <div class="pac-legend" style="display: flex; justify-content: flex-end; align-items: center; gap: 4px; font-size: 11px; color: var(--text-dim); padding-right: 12px;">
-            <span style="margin-right: 4px;">Less</span>
-            <div style="width: 12px; height: 12px; border-radius: 2px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);"></div>
-            <div style="width: 12px; height: 12px; border-radius: 2px; background: #123354;"></div>
-            <div style="width: 12px; height: 12px; border-radius: 2px; background: #154c87;"></div>
-            <div style="width: 12px; height: 12px; border-radius: 2px; background: #1668c4;"></div>
-            <div style="width: 12px; height: 12px; border-radius: 2px; background: #1584ff;"></div>
-            <span style="margin-left: 4px;">More</span>
+
+          <!-- Legend: GitHub green palette -->
+          <div class="pac-legend-row">
+            <span class="pac-legend-text">Less</span>
+            <div class="pac-legend-cell" style="background:#161b22; border:1px solid rgba(255,255,255,0.1);"></div>
+            <div class="pac-legend-cell" style="background:#0e4429;"></div>
+            <div class="pac-legend-cell" style="background:#006d32;"></div>
+            <div class="pac-legend-cell" style="background:#26a641;"></div>
+            <div class="pac-legend-cell" style="background:#39d353;"></div>
+            <span class="pac-legend-text">More</span>
           </div>
         </section>
 
