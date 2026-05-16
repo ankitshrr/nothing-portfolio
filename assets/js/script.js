@@ -772,5 +772,25 @@ async function initPacManGraph() {
 // Kick off when page is loaded (called inside the existing load listener below)
 document.addEventListener('DOMContentLoaded', () => {
   initPacManGraph();
+
+  // Scroll Reveal Animation via Intersection Observer
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.15
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target); // Only animate once
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.scroll-reveal').forEach(el => {
+    observer.observe(el);
+  });
 });
 
