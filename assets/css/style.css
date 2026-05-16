@@ -1821,9 +1821,9 @@ body.page-loaded .hero-widget {
   flex-shrink: 0;
 }
 .pac-gh-link:hover {
-  color: #39d353;
-  border-color: #39d353;
-  background: rgba(57,211,83,0.07);
+  color: #54aeff;
+  border-color: #54aeff;
+  background: rgba(84,174,255,0.07);
 }
 
 /* ── Hero stat block ── */
@@ -1846,7 +1846,7 @@ body.page-loaded .hero-widget {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(57,211,83,0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(84,174,255,0.4), transparent);
 }
 .pac-hero-inner {
   display: flex;
@@ -1867,7 +1867,7 @@ body.page-loaded .hero-widget {
   line-height: 1;
   color: var(--text-main);
   letter-spacing: -0.03em;
-  background: linear-gradient(135deg, #39d353 0%, #26a641 100%);
+  background: linear-gradient(135deg, #54aeff 0%, #007aff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1895,7 +1895,7 @@ body.page-loaded .hero-widget {
   background: var(--surface-mid);
 }
 .pac-sec-chip svg {
-  color: #39d353;
+  color: #54aeff;
   flex-shrink: 0;
 }
 .pac-streak-icon {
