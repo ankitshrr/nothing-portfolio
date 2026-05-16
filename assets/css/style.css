@@ -1403,23 +1403,41 @@ section.widget {
 .pf-col {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
+  min-width: 140px;
 }
 .pf-col .label {
-  margin: 0 0 4px 0;
+  margin: 0 0 8px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--glass-border);
+  color: var(--text-muted);
+  width: 100%;
 }
 .pf-link {
   color: var(--text-dim);
   text-decoration: none;
-  font-size: 14px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
   font-weight: 500;
   transition: var(--transition);
   display: inline-flex;
   align-items: center;
 }
+.pf-link::before {
+  content: '→';
+  margin-right: 8px;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: var(--transition);
+  color: #54aeff;
+}
 .pf-link:hover {
-  color: var(--text-main);
+  color: #54aeff;
   transform: translateX(4px);
+}
+.pf-link:hover::before {
+  opacity: 1;
+  transform: translateX(0);
 }
 .pf-divider {
   margin: 0;
