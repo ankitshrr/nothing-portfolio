@@ -1,7 +1,7 @@
 # Nothing-portfolio 
 
 A minimalist personal portfolio website inspired by **Nothing OS** aesthetics — clean UI, monochrome palette, subtle grid, and glyph-style interactions.
-This project is built to showcase my learning journey in **Software Development**, **Prompt Engineering**, and human-AI collaborative coding.
+This project is built to showcase my learning journey in **Web Fundamentals**, **Prompt Engineering**, and human-AI collaborative coding.
 
 ---
 
@@ -60,7 +60,6 @@ nothing-portfolio/
 
 This project is created to support my learning and growth in:
 
-* **Software Development** — understanding how structure, style, and interaction work together to build clean web applications
 * **Prompt Engineering & AI Collaboration** — This project was built 50/50: half hand-crafted design thinking and logic, and half AI-assisted coding to accelerate development
 * **Frontend Fundamentals** — focusing on attention to detail, UI consistency, usability, and a testing mindset
 
