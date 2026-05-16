@@ -50,6 +50,29 @@ function triggerGlyph(element) {
 }
 window.triggerGlyph = triggerGlyph;
 
+// Smart Email Button Logic
+document.addEventListener('DOMContentLoaded', () => {
+  const sendEmailBtn = document.getElementById('sendEmailBtn');
+  if (sendEmailBtn) {
+    sendEmailBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const email = 'ankitprogressx@gmail.com';
+      const subject = encodeURIComponent('Hello Ankit');
+      const body = encodeURIComponent('Hi Ankit,\n\nI saw your portfolio and wanted to connect regarding an opportunity.');
+      
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      
+      if (isMobile) {
+        // Open native email app
+        window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+      } else {
+        // Open Gmail on the web
+        window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`, '_blank');
+      }
+    });
+  }
+});
+
 // Hero glyph
 function runGlyphSequence() {
   const segments = document.querySelectorAll(".glyph-segment");
