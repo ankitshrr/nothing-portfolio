@@ -74,10 +74,9 @@ img:not(.pacman-graph-img) {
   filter: none;
   opacity: 1;
   transform: none;
-  max-width: 100%;
+  min-width: 800px;
   display: block;
   margin: 0 auto;
-  background-color:red;
 }
 
 /* BACKGROUND DOT */
@@ -1980,10 +1979,11 @@ body.page-loaded .hero-widget {
 }
 
 @media (max-width: 640px) {
-  .pac-top-bar { flex-direction: column; }
+  .pac-top-bar { flex-direction: column; align-items: flex-start; gap: 16px; }
   .pac-hero-stat { flex-direction: column; align-items: flex-start; }
-  .pac-secondary-stats { width: 100%; }
-  .pac-sec-chip { flex: 1; justify-content: center; }
+  .pac-secondary-stats { width: 100%; flex-wrap: wrap; gap: 10px; }
+  .pac-sec-divider { display: none; }
+  .pac-sec-chip { flex: 1; justify-content: center; background: rgba(255,255,255,0.03); border-radius: 12px; }
 }
 [data-theme="light"] .pac-hero-stat { background: rgba(0,0,0,0.02); }
 [data-theme="light"] .pac-legend-cell:first-of-type { border-color: rgba(0,0,0,0.12) !important; }
