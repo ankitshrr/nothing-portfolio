@@ -1,4 +1,4 @@
-﻿/* style.css */
+/* style.css */
 :root {
   --bg: #0a0a0a;
   --surface-low: rgba(255, 255, 255, 0.03);
@@ -1949,16 +1949,16 @@ body.page-loaded .hero-widget {
 }
 
 /* Streak active pulse */
-@keyframes streak-pulse-green {
-  0%   { box-shadow: 0 0 0 0 rgba(57,211,83,0.55); }
-  70%  { box-shadow: 0 0 0 8px rgba(57,211,83,0); }
-  100% { box-shadow: 0 0 0 0 rgba(57,211,83,0); }
+@keyframes streak-pulse-blue {
+  0%   { box-shadow: 0 0 0 0 rgba(84,174,255,0.55); }
+  70%  { box-shadow: 0 0 0 8px rgba(84,174,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(84,174,255,0); }
 }
 #pacStreakChip.streak-active {
-  background: rgba(57,211,83,0.06);
+  background: rgba(84,174,255,0.06);
 }
 #pacStreakChip.streak-active .pac-sec-value {
-  color: #39d353;
+  color: #54aeff;
 }
 
 @media (max-width: 640px) {
