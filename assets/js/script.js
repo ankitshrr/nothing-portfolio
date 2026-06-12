@@ -762,7 +762,15 @@ async function initPacManGraph() {
   function calcStreak(cs) {
     const sorted=[...cs].sort((a,b)=>b.date.localeCompare(a.date));
     const todayStr=new Date().toISOString().slice(0,10);
+    const yesterdayStr=prevDay(todayStr);
     let streak=0, expected=todayStr;
+    
+    // Check if there is a contribution today. If not, the streak might still be valid from yesterday.
+    const todayData = sorted.find(c => c.date === todayStr);
+    if (!todayData || (todayData.count || 0) === 0) {
+      expected = yesterdayStr;
+    }
+
     for(const c of sorted){
       if(c.date>expected) continue;
       if(c.date===expected){ if((c.count||0)>0){streak++;expected=prevDay(c.date);}else break; }
