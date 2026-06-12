@@ -2013,3 +2013,18 @@ body.page-loaded .hero-widget {
   opacity: 1;
   transform: translateY(0);
 }
+
+.project-type-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  background: var(--surface-high);
+  color: var(--text-main);
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}

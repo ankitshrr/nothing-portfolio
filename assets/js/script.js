@@ -396,6 +396,17 @@ function isPinned(repoName) {
   return !!PROJECT_OVERRIDES?.[repoName]?.pinned;
 }
 
+function getProjectType(repo, langs) {
+  const keywordsStr = ((repo.name || "") + " " + (repo.description || "") + " " + (langs || []).join(" ") + " " + (repo.language || "")).toLowerCase();
+  
+  const mobileKeywords = ['flutter', 'dart', 'react-native', 'swift', 'kotlin', 'ios', 'android'];
+  const webKeywords = ['html', 'css', 'javascript', 'js', 'react', 'vue', 'next', 'node', 'django', 'flask', 'web', 'portfolio'];
+  
+  if (mobileKeywords.some(k => keywordsStr.includes(k))) return "Mobile App";
+  if (webKeywords.some(k => keywordsStr.includes(k))) return "Web App";
+  return "Other";
+}
+
 function repoCard(repo, langs) {
   const title = safeText(pickProjectTitle(repo));
   const desc = safeText(repo.description || "");
@@ -413,6 +424,8 @@ function repoCard(repo, langs) {
     ? `<a href="${safeText(demo)}" target="_blank" rel="noopener" class="btn-system btn-tiny">Live Demo</a>`
     : "";
 
+  const projectType = getProjectType(repo, langs);
+
   return `
     <div class="work-card-inner">
       <div class="project-img-container">
@@ -421,6 +434,7 @@ function repoCard(repo, langs) {
       </div>
 
       <div class="work-card-content">
+        <span class="project-type-badge">${projectType}</span>
         <h3 style="word-break:break-word; margin-bottom: 8px; font-size: 20px;">${title}</h3>
         ${desc ? `<p class="card-desc" style="margin-bottom: 16px;">${desc}</p>` : ``}
 
