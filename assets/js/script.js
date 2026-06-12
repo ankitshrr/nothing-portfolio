@@ -564,13 +564,11 @@ const observerOptions = {
   threshold: 0.1
 };
 
-const observer = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver((entries, obs) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
-    } else {
-      // Remove visible class to repeat animation when scrolling back
-      entry.target.classList.remove('visible');
+      obs.unobserve(entry.target);
     }
   });
 }, observerOptions);
