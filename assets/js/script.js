@@ -798,6 +798,30 @@ async function initPacManGraph() {
   if(streakEl) streakEl.textContent = streak > 0 ? streak+'d' : '0d';
   if(streakChip && streak>0) streakChip.classList.add('streak-active');
 
+  function calcLongestStreak(cs) {
+    const sorted=[...cs].sort((a,b)=>a.date.localeCompare(b.date));
+    let max=0, cur=0, prev=null;
+    for(const c of sorted){
+      if((c.count||0)>0){
+        if(!prev) cur=1;
+        else{
+          const d=new Date(prev); d.setDate(d.getDate()+1);
+          const exp=d.toISOString().slice(0,10);
+          if(c.date===exp) cur++;
+          else if(c.date>exp) cur=1;
+        }
+        if(cur>max) max=cur;
+        prev=c.date;
+      }
+    }
+    return max;
+  }
+  const longestStreak=calcLongestStreak(contributions);
+  const longestStreakEl=document.getElementById('pacLongestStreak');
+  const longestStreakChip=document.getElementById('pacLongestStreakChip');
+  if(longestStreakEl) longestStreakEl.textContent = longestStreak > 0 ? longestStreak+'d' : '0d';
+  if(longestStreakChip && longestStreak>0) longestStreakChip.classList.add('streak-active');
+
   // Stat chips
   const total = contributions.reduce((s,c)=>s+(c.count||0),0);
   const best  = contributions.reduce((m,c)=>c.count>m?c.count:m,0);
@@ -833,4 +857,5 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(el);
   });
 });
+
 
