@@ -688,49 +688,6 @@ function renderSmoothScroll() {
 }
 requestAnimationFrame(renderSmoothScroll);
 
-// 2. Text Splitting & Viewport Detection
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.split-text').forEach((el) => {
-    // Save original text and clear element
-    const text = el.innerText;
-    el.innerHTML = '';
-    
-    // Split into words
-    const words = text.trim().split(/\s+/);
-    words.forEach((word, wordIndex) => {
-      const wordSpan = document.createElement('span');
-      wordSpan.className = 'split-word';
-      
-      // Split into characters
-      const chars = word.split('');
-      chars.forEach((char, charIndex) => {
-        const charSpan = document.createElement('span');
-        charSpan.className = 'split-char';
-        charSpan.textContent = char;
-        
-        // Easing / Stagger calculation
-        // Adds delay sequentially per character
-        charSpan.style.transitionDelay = `${(wordIndex * 2 + charIndex) * 20}ms`;
-        wordSpan.appendChild(charSpan);
-      });
-      
-      el.appendChild(wordSpan);
-      // Add space between words
-      el.appendChild(document.createTextNode(' '));
-    });
-  });
-
-  // Viewport detection to trigger text split animation
-  const splitObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-      }
-    });
-  }, { threshold: 0.2 });
-
-  document.querySelectorAll('.split-text').forEach(el => splitObserver.observe(el));
-});
 
 // ==========================================
 // PAC-MAN CONTRIBUTION GRAPH
