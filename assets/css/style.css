@@ -70,13 +70,18 @@ img:not(.pacman-graph-img) {
 .pac-contribution-widget picture {
   display: block;
 }
-.pac-contribution-widget picture img {
+.pac-contribution-widget .pacman-graph-img {
   filter: none;
   opacity: 1;
   transform: none;
-  min-width: 800px;
+  width: 100%;
+  height: auto;
   display: block;
   margin: 0 auto;
+}
+
+html[data-theme="dark"] .pacman-graph-img.theme-adaptive {
+  filter: invert(1) hue-rotate(180deg) !important;
 }
 
 /* BACKGROUND DOT */

@@ -602,7 +602,7 @@ document.querySelectorAll('.widget').forEach(widget => {
   }
 });
 
-window.addEventListener("load", () => {
+document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add('loading');
   
   let loadPercent = 0;
