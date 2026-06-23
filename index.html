@@ -21,20 +21,19 @@
 
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
-
+  
   <body>
     <!-- PRELOADER -->
     <div id="preloader" class="preloader">
-      <div class="loader-content">
-        <div class="loader-logo">ANKIT<span class="red-dot" style="display:inline-block; margin-left:4px;"></span></div>
-        <div class="loader-text">
-          <div class="loader-text-inner">Initializing System...</div>
-        </div>
-        <div class="loader-counter"><span id="loaderPercent">0</span>%</div>
+      <div class="circle-bounce-shadow preloader-spinner">
+        <div class="bounce-circle"></div>
+        <div class="bounce-circle"></div>
+        <div class="bounce-circle"></div>
+        <div class="bounce-shadow"></div>
+        <div class="bounce-shadow"></div>
+        <div class="bounce-shadow"></div>
       </div>
-      <div class="loader-progress-bar">
-        <div class="loader-progress-fill" id="loaderFill"></div>
-      </div>
+      <div class="loader-counter"><span id="loaderPercent">0</span>%</div>
     </div>
 
     <div id="scrollProgress"></div>
@@ -336,6 +335,8 @@
             <span class="pac-legend-text">More</span>
           </div>
         </section>
+
+
 
         <!-- MY WORK -->
         <section class="widget projects-widget" id="work">

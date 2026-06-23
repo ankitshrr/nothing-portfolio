@@ -607,10 +607,9 @@ document.addEventListener("DOMContentLoaded", () => {
   
   let loadPercent = 0;
   const loaderPercentEl = document.getElementById('loaderPercent');
-  const loaderFillEl = document.getElementById('loaderFill');
   const preloader = document.getElementById('preloader');
 
-  // Simple interval to simulate loading percentage
+  // Simulated loading percentage count
   const loadInterval = setInterval(() => {
     loadPercent += Math.floor(Math.random() * 15) + 5;
     if (loadPercent >= 100) {
@@ -618,7 +617,6 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(loadInterval);
       
       if(loaderPercentEl) loaderPercentEl.textContent = loadPercent;
-      if(loaderFillEl) loaderFillEl.style.width = loadPercent + '%';
       
       setTimeout(() => {
         if(preloader) preloader.classList.add('hidden');
@@ -633,13 +631,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 600); // Hold at 100% for a moment before fading
     } else {
       if(loaderPercentEl) loaderPercentEl.textContent = loadPercent;
-      if(loaderFillEl) loaderFillEl.style.width = loadPercent + '%';
     }
   }, 80);
 
   loadGitHub();
-  // Typewriter removed
-
   setInterval(loadGitHub, 10 * 60 * 1000);
 });
 
@@ -814,5 +809,7 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(el);
   });
 });
+
+
 
 
