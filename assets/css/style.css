@@ -469,6 +469,7 @@ nav.expanded .nav-hamburger span:nth-child(3) {
     display: none;
     width: 100%;
     flex-direction: column;
+    align-items: center;
     order: 3;
     margin-top: 12px;
     border-top: 1px solid var(--glass-border);
@@ -490,9 +491,8 @@ nav.expanded .nav-hamburger span:nth-child(3) {
     }
   }
   .nav-link {
-    width: 100%;
-    text-align: center;
-    padding: 14px;
+    width: fit-content;
+    padding: 14px 16px;
     border-radius: 14px;
   }
   .nav-brand {
