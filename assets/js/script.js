@@ -286,45 +286,20 @@ async function fetchRepoLanguages(owner, repo) {
   return langs;
 }
 
-function normalizeLangForDevicon(lang) {
-  const L = (lang || "").trim();
+function deviconName(lang) {
+  const l = (lang || "").toLowerCase().trim();
   const map = {
-    HTML: "html5",
-    CSS: "css3",
-    JavaScript: "javascript",
-    TypeScript: "typescript",
-    Python: "python",
-    Java: "java",
-    C: "c",
-    "C++": "cplusplus",
-    "C#": "csharp",
-    Go: "go",
-    PHP: "php",
-    Rust: "rust",
-    Ruby: "ruby",
-    Kotlin: "kotlin",
-    Swift: "swift",
-    Dart: "dart",
-    Scala: "scala",
-    R: "r",
-    Shell: "bash",
-    PowerShell: "powershell",
-    "Jupyter Notebook": "jupyter",
-    Vue: "vuejs",
-    "Vue.js": "vuejs",
-    Svelte: "svelte",
-    Dockerfile: "docker",
+    "c++": "cplusplus", "c#": "csharp", "f#": "fsharp",
+    "vue": "vuejs", "react": "react", "react-native": "react",
+    "next.js": "nextjs", "node.js": "nodejs",
+    "jupyter notebook": "jupyter", "shell": "bash",
+    "objective-c": "objectivec", "html": "html5",
+    "css": "css3", "scss": "sass", "sass": "sass"
   };
-  if (map[L]) return map[L];
-  return L.toLowerCase().replace(/\./g, "").replace(/\s+/g, "").replace(/#/g, "sharp").replace(/\+/g, "plus");
+  return map[l] || l;
 }
 
-function deviconUrl(lang) {
-  const key = normalizeLangForDevicon(lang);
-  return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${key}/${key}-original.svg`;
-}
-
-function renderLangChips(langs, fallbackPrimary) {
+function renderMinimalLangPills(langs, fallbackPrimary) {
   const list = Array.isArray(langs) ? langs.filter(Boolean) : [];
   const primary = (fallbackPrimary || "").trim();
 
@@ -332,36 +307,20 @@ function renderLangChips(langs, fallbackPrimary) {
   if (primary && !final.some((x) => x.toLowerCase() === primary.toLowerCase()) && final.length < 3) {
     final.push(primary);
   }
-  if (!final.length) return `<span class="chip">LANG: <b>—</b></span>`;
+  
+  if (!final.length) return "";
 
-  const fallbackSvg =
-    "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' width='16' height='16'>" +
-    "<path d='M8 9l-3 3 3 3'/><path d='M16 9l3 3-3 3'/><path d='M14 7l-4 10'/>" +
-    "</svg>";
+  const items = final.map(lang => {
+    const icon = deviconName(lang);
+    const url = `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${icon}/${icon}-original.svg`;
+    return `<span style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.15); background: transparent; color: var(--text-main); font-family: 'JetBrains Mono', monospace; line-height: 1;">
+      <img src="${url}" width="14" height="14" style="object-fit: contain; filter: brightness(0) invert(1); opacity: 0.85;" onerror="this.style.display='none'" alt="" />
+      ${safeText(lang)}
+    </span>`;
+  }).join("");
 
-  const items = final
-    .map((lang, idx) => {
-      const safe = safeText(lang);
-      const url = deviconUrl(lang);
-
-      const itemHTML = `
-        <span class="lang-item" title="Language: ${safe}">
-          <span class="lang-ico">
-            <img src="${url}" alt="${safe}"
-              onerror="this.remove(); this.parentElement.insertAdjacentHTML('beforeend','${fallbackSvg.replace(/'/g, "&#39;")}');" />
-          </span>
-          <span class="lang-text"><b>${safe}</b></span>
-        </span>
-      `;
-
-      if (idx === final.length - 1) return itemHTML;
-      return itemHTML + `<span class="lang-sep" aria-hidden="true"></span>`;
-    })
-    .join("");
-
-  return `<span class="lang-strip">${items}</span>`;
+  return `<div style="display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;">${items}</div>`;
 }
-
 
 function loadProjectOverrides() {
   const el = document.getElementById("projectOverrides");
@@ -410,14 +369,10 @@ function getProjectType(repo, langs) {
 function repoCard(repo, langs) {
   const title = safeText(pickProjectTitle(repo));
   const desc = safeText(repo.description || "");
-  const stars = repo.stargazers_count ?? 0;
-  const forks = repo.forks_count ?? 0;
-  const updated = fmtDate(repo.updated_at);
   const url = repo.html_url;
 
   const img = pickProjectImage(repo);
   const fallbackImg = ogRepoImage(GH_USERNAME, repo.name);
-  const langHTML = renderLangChips(langs, repo.language);
 
   const demo = pickProjectDemo(repo);
   const demoBtn = demo
@@ -425,26 +380,35 @@ function repoCard(repo, langs) {
     : "";
 
   const projectType = getProjectType(repo, langs);
+  const langPillsHTML = renderMinimalLangPills(langs, repo.language);
 
   return `
     <div class="work-card-inner">
-      <div class="project-img-container">
-        <img src="${img}" alt="${title}" loading="lazy"
-          onerror="this.onerror=null; this.src='${fallbackImg}';" />
-      </div>
-
-      <div class="work-card-content">
-        <span class="project-type-badge">${projectType}</span>
-        <h3 style="word-break:break-word; margin-bottom: 8px; font-size: 20px;">${title}</h3>
-        ${desc ? `<p class="card-desc" style="margin-bottom: 16px;">${desc}</p>` : ``}
-
-        <div class="lang-row">
-          ${langHTML}
+      <div class="work-list-header">
+        <div class="work-title-group">
+          <h3 class="work-list-title">${title}</h3>
+          <span class="project-type-badge" style="margin-bottom: 0;">${projectType}</span>
         </div>
-
-        <div class="card-actions" style="margin-top: 20px;">
-          ${demoBtn}
-          <a href="${url}" target="_blank" rel="noopener" class="btn-system btn-ghost btn-tiny">GitHub Repo</a>
+        <div class="work-expand-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </div>
+      </div>
+      <div class="work-list-body">
+        <div class="work-list-content">
+          <div class="work-list-text">
+            ${desc ? `<p class="card-desc" style="margin-bottom: 24px; font-size: 15px;">${desc}</p>` : ``}
+            ${langPillsHTML}
+            <div class="card-actions">
+              ${demoBtn}
+              <a href="${url}" target="_blank" rel="noopener" class="btn-system btn-ghost btn-tiny">GitHub Repo</a>
+            </div>
+          </div>
+          <div class="work-list-img">
+            <img src="${img}" alt="${title}" loading="lazy" onerror="this.onerror=null; this.src='${fallbackImg}';" />
+          </div>
         </div>
       </div>
     </div>

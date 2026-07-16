@@ -974,84 +974,121 @@ section.widget {
 }
 .projects-container {
   display: flex;
-  gap: 24px;
+  flex-direction: column;
+  gap: 0;
   margin-top: 24px;
   padding-bottom: 24px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Custom scrollbar for horizontal cards */
-.projects-container::-webkit-scrollbar {
-  height: 8px;
-}
-.projects-container::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 10px;
-}
-.projects-container::-webkit-scrollbar-thumb {
-  background: var(--surface-high);
-  border-radius: 10px;
-}
-.projects-container::-webkit-scrollbar-thumb:hover {
-  background: var(--text-dim);
 }
 
 .work-card-inner {
-  scroll-snap-align: start;
-  flex: 0 0 calc(33.333% - 16px);
-  min-width: 320px;
-  max-width: 420px;
-  background: var(--surface-low);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
-  padding: 24px;
+  position: relative;
+  border: none;
+  border-bottom: 1px solid var(--glass-border);
+  border-radius: 0;
+  overflow: hidden;
+  padding: 32px 16px;
+  background: transparent;
   display: flex;
   flex-direction: column;
   transition: all 0.4s ease;
+  height: auto;
+  min-height: 0;
+  cursor: pointer;
 }
-@media (max-width: 992px) {
-  .work-card-inner {
-    flex: 0 0 calc(50% - 12px);
-  }
-}
-@media (max-width: 640px) {
-  .work-card-inner {
-    flex: 0 0 85%;
-    min-width: 280px;
-  }
-}
-.work-card-inner:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  background: var(--surface-mid);
-  box-shadow: 0 25px 45px -10px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 255, 255, 0.05);
-  transform: translateY(-4px) scale(1.02);
+.work-card-inner:first-child {
+  border-top: 1px solid var(--glass-border);
 }
 
-.project-img-container {
-  width: 100%;
-  aspect-ratio: 16/9;
-  background: var(--surface-low);
-  border-radius: 12px;
-  border: 1px solid var(--glass-border);
-  margin-bottom: 14px;
-  overflow: hidden;
-  position: relative;
+.work-card-inner:hover {
+  background: rgba(255, 255, 255, 0.02);
+  transform: none;
+  box-shadow: none;
+  padding-left: 24px;
 }
-.project-img-container img {
+
+.work-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.work-title-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.work-list-title {
+  font-size: clamp(24px, 3vw, 36px);
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text-dim);
+  transition: color 0.3s ease;
+  word-break: break-word;
+}
+.work-card-inner:hover .work-list-title {
+  color: var(--text-main);
+}
+
+.work-expand-icon {
+  color: var(--text-muted);
+  transition: transform 0.4s ease, color 0.3s ease;
+  display: grid;
+  place-items: center;
+}
+.work-card-inner:hover .work-expand-icon {
+  color: var(--text-main);
+  transform: rotate(45deg);
+}
+
+.work-list-body {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
+}
+.work-card-inner:hover .work-list-body {
+  max-height: 600px;
+  opacity: 1;
+  margin-top: 24px;
+}
+
+.work-list-content {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+.work-list-text {
+  flex: 1;
+}
+.work-list-img {
+  flex: 0 0 40%;
+  aspect-ratio: 16/9;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+}
+.work-list-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: var(--transition);
-  /* optional sharpness helpers */
-  image-rendering: -webkit-optimize-contrast;
-  transform: translateZ(0);
-  backface-visibility: hidden;
+}
+
+@media (max-width: 768px) {
+  .work-list-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .work-list-img {
+    width: 100%;
+    margin-top: 16px;
+  }
+  .work-card-inner:hover .work-list-body {
+    max-height: 800px;
+  }
 }
 
 }
