@@ -415,6 +415,42 @@ function repoCard(repo, langs) {
   `;
 }
 
+/**
+ * Bind click-to-toggle on project accordion cards.
+ * Needed because :hover doesn't fire on touch/mobile devices.
+ */
+function bindProjectCardTaps() {
+  const container = document.getElementById('ghRepos');
+  if (!container) return;
+
+  container.querySelectorAll('.work-card-inner').forEach(card => {
+    // Remove old listener if re-rendered
+    card.removeEventListener('click', card._toggleHandler);
+
+    card._toggleHandler = function(e) {
+      // Don't intercept clicks on links / buttons inside the card
+      if (e.target.closest('a') || e.target.closest('button')) return;
+      const isActive = card.classList.contains('is-active');
+      // Close all siblings first
+      container.querySelectorAll('.work-card-inner.is-active').forEach(c => c.classList.remove('is-active'));
+      if (!isActive) {
+        card.classList.add('is-active');
+        // On touch/tablet: scroll the card to just below the navbar
+        // so expanded details are immediately visible — no manual scrolling needed
+        const isTouchViewport = window.matchMedia('(max-width: 1024px)').matches;
+        if (isTouchViewport) {
+          setTimeout(() => {
+            const navHeight = document.getElementById('mainNav')?.offsetHeight || 72;
+            const cardTop = card.getBoundingClientRect().top + window.scrollY - navHeight - 12;
+            window.scrollTo({ top: cardTop, behavior: 'smooth' });
+          }, 60); // slight delay lets the DOM expand before measuring
+        }
+      }
+    };
+
+    card.addEventListener('click', card._toggleHandler);
+  });
+}
 
 async function fetchGitHubLive() {
   const userUrl = `https://api.github.com/users/${GH_USERNAME}`;
@@ -480,6 +516,7 @@ function renderGitHub(user, repos) {
 
   // Render fast first (no langs)
   ghReposEl.innerHTML = visible.map((r) => repoCard(r, [])).join("");
+  bindProjectCardTaps();
 
   // Then enhance with langs
   Promise.allSettled(visible.map((r) => fetchRepoLanguages(GH_USERNAME, r.name))).then((langResults) => {
@@ -489,6 +526,7 @@ function renderGitHub(user, repos) {
         return repoCard(r, langs);
       })
       .join("");
+    bindProjectCardTaps();
   });
 }
 
