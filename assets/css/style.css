@@ -983,17 +983,6 @@ section.widget {
   position: relative;
   border: none;
   border-bottom: 1px solid var(--glass-border);
-<<<<<<< HEAD
-  border-radius: 0;
-  overflow: hidden;
-  padding: 32px 16px;
-  background: transparent;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.4s ease;
-  height: auto;
-  min-height: 0;
-=======
   min-height: 1px;
   border-radius: 0;
   padding: 28px 16px;
@@ -1002,22 +991,10 @@ section.widget {
   flex-direction: column;
   gap: 0;
   transition: background 0.3s ease, padding-left 0.3s ease;
->>>>>>> 386e15b (improved project section with click-to-expand cards and fixed border rendering)
   cursor: pointer;
 }
 .work-card-inner:first-child {
   border-top: 1px solid var(--glass-border);
-<<<<<<< HEAD
-}
-
-.work-card-inner:hover {
-  background: rgba(255, 255, 255, 0.02);
-  transform: none;
-  box-shadow: none;
-  padding-left: 24px;
-}
-
-=======
   min-height: 1px;
 }
 
@@ -1028,38 +1005,17 @@ section.widget {
 }
 
 /* header row */
->>>>>>> 386e15b (improved project section with click-to-expand cards and fixed border rendering)
 .work-list-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-<<<<<<< HEAD
-  gap: 20px;
-=======
   gap: 12px;
   width: 100%;
->>>>>>> 386e15b (improved project section with click-to-expand cards and fixed border rendering)
 }
 
 .work-title-group {
   display: flex;
   align-items: center;
-<<<<<<< HEAD
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.work-list-title {
-  font-size: clamp(24px, 3vw, 36px);
-  margin: 0;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  color: var(--text-dim);
-  transition: color 0.3s ease;
-  word-break: break-word;
-}
-.work-card-inner:hover .work-list-title {
-=======
   gap: 10px;
   flex-wrap: wrap;
   flex: 1;
@@ -1078,7 +1034,6 @@ section.widget {
 }
 .work-card-inner:hover .work-list-title,
 .work-card-inner.is-active .work-list-title {
->>>>>>> 386e15b (improved project section with click-to-expand cards and fixed border rendering)
   color: var(--text-main);
 }
 
@@ -1087,53 +1042,21 @@ section.widget {
   transition: transform 0.4s ease, color 0.3s ease;
   display: grid;
   place-items: center;
-<<<<<<< HEAD
-}
-.work-card-inner:hover .work-expand-icon {
-=======
   flex-shrink: 0;
   width: 28px;
   height: 28px;
 }
 .work-card-inner:hover .work-expand-icon,
 .work-card-inner.is-active .work-expand-icon {
->>>>>>> 386e15b (improved project section with click-to-expand cards and fixed border rendering)
   color: var(--text-main);
   transform: rotate(45deg);
 }
 
-<<<<<<< HEAD
-=======
 /* expandable body */
->>>>>>> 386e15b (improved project section with click-to-expand cards and fixed border rendering)
 .work-list-body {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-<<<<<<< HEAD
-  transition: max-height 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
-}
-.work-card-inner:hover .work-list-body {
-  max-height: 600px;
-  opacity: 1;
-  margin-top: 24px;
-}
-
-.work-list-content {
-  display: flex;
-  gap: 40px;
-  align-items: flex-start;
-}
-.work-list-text {
-  flex: 1;
-}
-.work-list-img {
-  flex: 0 0 40%;
-  aspect-ratio: 16/9;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid var(--glass-border);
-=======
   transition: max-height 0.55s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease, margin-top 0.3s ease;
   margin-top: 0;
 }
@@ -1175,30 +1098,12 @@ section.widget {
   overflow: hidden;
   border: 1px solid var(--glass-border);
   align-self: flex-start;
->>>>>>> 386e15b (improved project section with click-to-expand cards and fixed border rendering)
 }
 .work-list-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-<<<<<<< HEAD
-}
-
-@media (max-width: 768px) {
-  .work-list-content {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .work-list-img {
-    width: 100%;
-    margin-top: 16px;
-  }
-  .work-card-inner:hover .work-list-body {
-    max-height: 800px;
-  }
-=======
   display: block;
->>>>>>> 386e15b (improved project section with click-to-expand cards and fixed border rendering)
 }
 
 /* tablet: 190px thumbnail beside text */
