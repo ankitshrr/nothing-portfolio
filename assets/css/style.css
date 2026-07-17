@@ -2236,7 +2236,7 @@ body.page-loaded .hero-widget {
 /* ── Mobile: contribution section ── */
 @media (max-width: 640px) {
   .pac-contribution-widget {
-    padding: 24px 16px;
+    display: none !important;
   }
   .pac-top-bar {
     flex-direction: column;
