@@ -792,23 +792,23 @@ document.addEventListener('DOMContentLoaded', () => {
   initPacManGraph();
 
   // Scroll Reveal Animation via Intersection Observer
-  const observerOptions = {
+  const revealObserverOptions = {
     root: null,
-    rootMargin: '0px',
-    threshold: 0.15
+    rootMargin: '0px 0px -40px 0px', // Trigger slightly before the element hits the bottom of viewport
+    threshold: 0.05  // Only require 5% visibility — works on mobile for tall widgets
   };
 
-  const observer = new IntersectionObserver((entries, observer) => {
+  const revealObserver = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target); // Only animate once
+        obs.unobserve(entry.target); // Only animate once
       }
     });
-  }, observerOptions);
+  }, revealObserverOptions);
 
   document.querySelectorAll('.scroll-reveal').forEach(el => {
-    observer.observe(el);
+    revealObserver.observe(el);
   });
 });
 
