@@ -746,6 +746,35 @@ section.widget {
   max-width: 720px;
   margin-bottom: 10px;
 }
+
+/* Section Header Layouts */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.section-header.sm-margin {
+  margin-bottom: 10px;
+}
+.section-header .label {
+  margin: 0;
+}
+.section-header h2 {
+  font-size: clamp(24px, 4vw, 32px);
+  margin: 8px 0 0;
+  letter-spacing: -0.03em;
+}
+
+/* Contact Utilities */
+.contact-tag-wrap {
+  margin-bottom: 24px;
+}
+.contact-title .highlight {
+  color: var(--text-dim);
+}
 .card-desc {
   color: var(--text-dim);
   margin-top: 8px;
@@ -1706,6 +1735,8 @@ section.widget {
   transform: translateY(4px);
   transition: var(--transition);
   margin-bottom: 32px;
+  color: var(--text-main);
+  font-weight: 700;
 }
 .contact-socials {
   display: flex;
