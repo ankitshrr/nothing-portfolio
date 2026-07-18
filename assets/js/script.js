@@ -322,16 +322,32 @@ function renderMinimalLangPills(langs, fallbackPrimary) {
   return `<div style="display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;">${items}</div>`;
 }
 
-function loadProjectOverrides() {
-  const el = document.getElementById("projectOverrides");
-  if (!el) return {};
-  try {
-    return JSON.parse(el.textContent || "{}") || {};
-  } catch {
-    return {};
+const PROJECT_OVERRIDES = {
+  "nothing-portfolio": {
+    "title": "Nothing OS Portfolio",
+    "image": "assets/img/projects/portfolio.webp",
+    "demo": "",
+    "pinned": true
+  },
+  "zhangjiajie-3d-parallax": {
+    "title": "Altitude 3D Parallax",
+    "image": "assets/img/projects/altitude.webp",
+    "demo": "",
+    "pinned": true
+  },
+  "python-lyric-sync": {
+    "title": "Terminal Lyric Sync",
+    "image": "assets/img/projects/terminal.webp",
+    "demo": "",
+    "pinned": true
+  },
+  "luxxtime-watch-store": {
+    "title": "LuxxTime Watch Store",
+    "image": "",
+    "demo": "",
+    "pinned": true
   }
-}
-const PROJECT_OVERRIDES = loadProjectOverrides();
+};
 
 function pickProjectTitle(repo) {
   const ov = PROJECT_OVERRIDES?.[repo.name];
