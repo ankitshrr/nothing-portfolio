@@ -29,7 +29,7 @@ export default function Contact() {
   return (
     <section className="widget contact-widget fade-in-section" id="contact">
       <div className="status-tag contact-tag-wrap">
-        <span className="red-dot"></span>
+        <span className="blue-dot"></span>
         <span>Available for Opportunities</span>
       </div>
 

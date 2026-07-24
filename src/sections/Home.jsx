@@ -71,12 +71,12 @@ const Home = forwardRef((props, ref) => {
 
       <div className="hero-content">
         <div className="status-tag">
-          <span className="red-dot"></span>
+          <span className="blue-dot"></span>
           <span>Available for work</span>
         </div>
 
         <h1 className="hero-title">
-          <span className="dot-matrix">ANKIT SHRESTHA</span>
+          ANKIT SHRESTHA<br />
           SOFTWARE<br />DEVELOPER.
         </h1>
 

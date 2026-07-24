@@ -9,7 +9,7 @@
   --text-dim: rgba(255, 255, 255, 0.7);
   --text-muted: rgba(255, 255, 255, 0.4);
 
-  --nothing-red: #007aff;
+  --accent-blue: #007aff;
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-bg: rgba(255, 255, 255, 0.05);
 
@@ -115,7 +115,7 @@ html[data-theme="dark"] .pacman-graph-img.theme-adaptive {
   left: 0;
   width: 0%;
   height: 3px;
-  background: var(--nothing-red);
+  background: var(--accent-blue);
   z-index: 9999;
   transition: width 0.1s ease-out;
 }
@@ -173,7 +173,7 @@ nav.expanded {
   line-height: 1;
 }
 .nav-brand:hover {
-  color: var(--nothing-red);
+  color: var(--accent-blue);
   background: rgba(255, 255, 255, 0.05);
 }
 
@@ -214,7 +214,7 @@ nav.expanded {
   transform: translateX(-50%) scaleX(0);
   width: calc(100% - 32px);
   height: 2px;
-  background: var(--nothing-red);
+  background: var(--accent-blue);
   border-radius: 2px;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   transform-origin: center;
@@ -325,9 +325,9 @@ nav.expanded .nav-hamburger span:nth-child(3) {
   width: 50px;
   height: 50px;
   background: transparent;
-  border: 3px solid var(--nothing-red);
+  border: 3px solid var(--accent-blue);
   border-radius: 50%;
-  box-shadow: 0 0 15px var(--nothing-red), inset 0 0 10px var(--nothing-red);
+  box-shadow: 0 0 15px var(--accent-blue), inset 0 0 10px var(--accent-blue);
 }
 #mainNav .ng-left-dot {
   top: 50%;
@@ -680,7 +680,7 @@ section.widget {
   gap: 8px;
   font-family: "JetBrains Mono", monospace;
   font-size: 10px;
-  color: var(--nothing-red);
+  color: var(--accent-blue);
   background: transparent;
   padding: 6px 0;
   width: fit-content;
@@ -691,10 +691,10 @@ section.widget {
   border: none;
 }
 
-.red-dot {
+.blue-dot {
   width: 8px;
   height: 8px;
-  background: var(--nothing-red);
+  background: var(--accent-blue);
   border-radius: 50%;
   display: inline-block;
   animation: strobe 2s infinite;
@@ -840,7 +840,7 @@ section.widget {
   transition: var(--transition);
 }
 .about-photo-container:hover {
-  border-color: var(--nothing-red);
+  border-color: var(--accent-blue);
   background: var(--surface-high);
 }
 .about-photo-container img {
@@ -955,7 +955,7 @@ section.widget {
   gap: 8px;
 }
 .bento-header svg {
-  color: var(--nothing-red);
+  color: var(--accent-blue);
 }
 
 /* Marquee Box */
@@ -1076,7 +1076,7 @@ section.widget {
 
 .bento-tool-item:hover {
   background: rgba(255, 255, 255, 0.05);
-  border-color: var(--nothing-red);
+  border-color: var(--accent-blue);
 }
 
 .bento-tool-item-left {
@@ -1104,7 +1104,7 @@ section.widget {
 .bento-tool-status .dot {
   width: 6px;
   height: 6px;
-  background: var(--nothing-red);
+  background: var(--accent-blue);
   border-radius: 50%;
   animation: strobe 2s infinite;
 }
@@ -1135,7 +1135,7 @@ section.widget {
 .timeline-item .date {
   font-family: "JetBrains Mono";
   font-size: 11px;
-  color: var(--nothing-red);
+  color: var(--accent-blue);
   margin-bottom: 4px;
   display: block;
 }
@@ -1907,8 +1907,8 @@ section.widget {
   box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 .btn-system:hover {
-  background: var(--nothing-red);
-  border-color: var(--nothing-red);
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
   color: #ffffff;
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 10px 20px -5px rgba(0, 122, 255, 0.3);
@@ -2015,7 +2015,7 @@ section.widget {
   outline: none;
   min-width: 220px;
 }
-.work-input:focus{ border-color: var(--nothing-red); }
+.work-input:focus{ border-color: var(--accent-blue); }
 
 /* === Work cards: meta row + nicer language icons === */
 .meta-row{
@@ -2029,14 +2029,14 @@ section.widget {
   padding:8px 10px;
 }
 .lang-item{
-  color: var(--nothing-red);
+  color: var(--accent-blue);
 }
 .lang-ico img{
   /* tint devicon icons to match site accent */
   filter: grayscale(1) sepia(1) saturate(9) hue-rotate(330deg) brightness(1.15);
 }
 .lang-ico svg{
-  color: var(--nothing-red);
+  color: var(--accent-blue);
 }
 
 /* Small hover polish */
@@ -2119,10 +2119,10 @@ body.page-loaded .hero-widget {
   opacity: 0;
   animation: fadeUp 0.6s var(--ease) forwards;
 }
-.loader-logo .red-dot {
+.loader-logo .blue-dot {
   width: clamp(8px, 2vw, 16px);
   height: clamp(8px, 2vw, 16px);
-  background: var(--nothing-red);
+  background: var(--accent-blue);
   border-radius: 50%;
   animation: pulseDot 1s infinite alternate;
 }
@@ -2159,7 +2159,7 @@ body.page-loaded .hero-widget {
 .loader-progress-fill {
   height: 100%;
   width: 0%;
-  background: var(--nothing-red);
+  background: var(--accent-blue);
   transition: width 0.1s linear;
 }
 
@@ -2186,11 +2186,11 @@ body.page-loaded .hero-widget {
   top: 0;
   left: 0;
   height: 4px;
-  background: var(--nothing-red);
+  background: var(--accent-blue);
   z-index: 10000;
   width: 0%;
   pointer-events: none;
-  box-shadow: 0 0 10px rgba(255, 45, 55, 0.5);
+  box-shadow: 0 0 10px rgba(0, 122, 255, 0.5);
 }
 
 /* 2. Text Splitting & Premium Easing */
@@ -2507,7 +2507,7 @@ body.page-loaded .hero-widget {
   height: calc(10px * var(--size-multiplier));
   position: absolute;
   border-radius: 50%;
-  background-color: var(--loader-color, var(--nothing-red));
+  background-color: var(--loader-color, var(--accent-blue));
   left: 15%;
   transform-origin: 50%;
   animation: bounce-circle-anim var(--loader-duration, 0.6s) alternate infinite ease;
@@ -2586,7 +2586,7 @@ body.page-loaded .hero-widget {
 .preloader-spinner.circle-bounce-shadow {
   --loader-size: 50px !important;
   --size-multiplier: 1.25 !important;
-  --loader-color: var(--nothing-red) !important;
+  --loader-color: var(--accent-blue) !important;
   --loader-duration: 0.6s !important;
   margin-top: 24px;
   margin-bottom: 8px;

@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import Preloader from './components/Preloader';
 import Navbar from './components/Navbar';
 import Home from './sections/Home';
 import About from './sections/About';
@@ -15,6 +14,9 @@ function App() {
   const homeRef = useRef(null);
 
   useEffect(() => {
+    document.body.classList.remove('loading');
+    document.body.classList.add('page-loaded');
+
     let currentScroll = 0;
     let targetScroll = 0;
     let animationFrameId;
@@ -71,16 +73,9 @@ function App() {
     };
   }, []);
 
-  const handlePreloaderComplete = () => {
-    document.body.classList.remove('loading');
-    document.body.classList.add('page-loaded');
-  };
-
   return (
     <>
-      <Preloader onComplete={handlePreloaderComplete} />
       <div id="scrollProgress" style={{ width: `${scrollProgress}%` }}></div>
-      <div className="nt-canvas"></div>
       
       <Navbar activeSection={activeSection} onTriggerHero={() => homeRef.current?.triggerBurst()} />
 

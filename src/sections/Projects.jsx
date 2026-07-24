@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useGitHubRepos } from '../hooks/useGitHub';
+import SkeletonLoader from '../components/SkeletonLoader';
 import ProjectCard from '../components/ProjectCard';
 
 export default function Projects() {
@@ -38,40 +39,29 @@ export default function Projects() {
           <span className="label">Portfolio</span>
           <h2>Selected Works</h2>
         </div>
-
-        <div style={{ display: 'none' }}>
-          <div className="play-chips" style={{ marginTop: '10px' }}>
-            <span className="chip">GitHub: <b>@{GH_USERNAME}</b></span>
-            <span className="chip">Repositories: <b>{user?.public_repos ?? '--'}</b></span>
-            <span className="chip">Followers: <b>{user?.followers ?? '--'}</b></span>
-            <span className="chip">Status: <b>{status}</b></span>
-          </div>
-
-          <div className="divider"></div>
-
-          <div className="work-controls" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '14px' }}>
-            <input 
-              className="work-input" 
-              placeholder="Search projects..." 
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <select className="work-input" value={sort} onChange={(e) => setSort(e.target.value)}>
-              <option value="updated">Sort: Recently updated</option>
-              <option value="stars">Sort: Most stars</option>
-              <option value="name">Sort: Name (A-Z)</option>
-            </select>
-          </div>
-        </div>
       </div>
 
       <div className="projects-container">
         {visibleRepos.length === 0 ? (
-          <div className="work-card-inner" style={{ cursor: 'default' }}>
-            <span className="label">{search ? 'EMPTY' : 'STATUS'}</span>
-            <h3>{search ? 'No projects found' : (status === 'Rate Limited' ? 'GitHub data unavailable' : 'Loading...')}</h3>
-            <p className="card-desc">{search ? 'No project matches your search. Try a different keyword.' : (status === 'Rate Limited' ? 'GitHub API rate limit hit. Refresh later.' : 'Fetching projects...')}</p>
-          </div>
+          status === 'Loading...' ? (
+            <>
+              <SkeletonLoader />
+              <SkeletonLoader />
+              <SkeletonLoader />
+            </>
+          ) : search ? (
+            <div className="work-card-inner" style={{ cursor: 'default' }}>
+              <span className="label">EMPTY</span>
+              <h3>No projects found</h3>
+              <p className="card-desc">No project matches your search. Try a different keyword.</p>
+            </div>
+          ) : (
+            <div className="work-card-inner" style={{ cursor: 'default' }}>
+              <span className="label">STATUS</span>
+              <h3>GitHub data unavailable</h3>
+              <p className="card-desc">{status === 'Rate Limited' ? 'GitHub API rate limit hit. Refresh later.' : 'Fetching projects failed.'}</p>
+            </div>
+          )
         ) : (
           visibleRepos.map((repo) => (
             <ProjectCard 

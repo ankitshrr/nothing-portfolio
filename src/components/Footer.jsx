@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="pf-brand">
           <h2>Ankit Shrestha</h2>
           <div className="status-tag">
-            <span className="red-dot"></span>
+            <span className="blue-dot"></span>
             <span>Software Developer • Available for work</span>
           </div>
         </div>
