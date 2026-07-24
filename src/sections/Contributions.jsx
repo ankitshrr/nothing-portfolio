@@ -22,7 +22,9 @@ export default function Contributions() {
       <div className="pac-hero-stat">
         <div className="pac-hero-inner">
           <span className="pac-hero-label">Total Contributions</span>
-          <span className="pac-hero-value" id="pacTotalContrib">{total > 0 ? total.toLocaleString() : '—'}</span>
+          <span className="pac-hero-value" id="pacTotalContrib">
+            {total > 0 ? total.toLocaleString() : <div className="skeleton-box" style={{ width: '100px', height: '48px', display: 'inline-block' }}></div>}
+          </span>
         </div>
         <div className="pac-secondary-stats">
           <div className="pac-sec-chip">
@@ -30,13 +32,17 @@ export default function Contributions() {
               <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
             </svg>
             <span className="pac-sec-label">Best Day</span>
-            <span className="pac-sec-value" id="pacBestDay">{best > 0 ? best : '—'}</span>
+            <span className="pac-sec-value" id="pacBestDay">
+              {best > 0 ? best : <div className="skeleton-box" style={{ width: '24px', height: '20px', margin: '0 auto' }}></div>}
+            </span>
           </div>
           <div className="pac-sec-divider"></div>
           <div className={`pac-sec-chip ${streak > 0 ? 'streak-active' : ''}`} id="pacStreakChip">
             <span className="pac-streak-icon">🔥</span>
             <span className="pac-sec-label">Current Streak</span>
-            <span className="pac-sec-value" id="pacStreak">{streak > 0 ? `${streak}d` : '0d'}</span>
+            <span className="pac-sec-value" id="pacStreak">
+              {streak > 0 ? `${streak}d` : <div className="skeleton-box" style={{ width: '32px', height: '20px', margin: '0 auto' }}></div>}
+            </span>
           </div>
           <div className="pac-sec-divider"></div>
           <div className={`pac-sec-chip ${longestStreak > 0 ? 'streak-active' : ''}`} id="pacLongestStreakChip">
@@ -44,7 +50,9 @@ export default function Contributions() {
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
             </svg>
             <span className="pac-sec-label">Longest Streak</span>
-            <span className="pac-sec-value" id="pacLongestStreak">{longestStreak > 0 ? `${longestStreak}d` : '0d'}</span>
+            <span className="pac-sec-value" id="pacLongestStreak">
+              {longestStreak > 0 ? `${longestStreak}d` : <div className="skeleton-box" style={{ width: '32px', height: '20px', margin: '0 auto' }}></div>}
+            </span>
           </div>
         </div>
       </div>
