@@ -175,13 +175,42 @@ section.widget {
   transform: translateY(-2px);
 }
 
-/* HERO */
 .hero-widget {
   grid-column: span 12;
   min-height: calc(100vh - 110px);
   min-height: calc(100dvh - 110px);
   padding: 24px;
   justify-content: center;
+  overflow: visible;
+}
+
+/* ── Hero widget outer shell — tablet ── */
+@media (max-width: 900px) {
+  .hero-widget {
+    min-height: calc(100dvh - 120px);
+    padding: 28px 22px;
+    border-radius: var(--radius-lg);  /* 24px instead of 32px */
+  }
+
+  .hero-widget:hover {
+    transform: none;  /* no lift on touch */
+  }
+}
+
+/* ── Hero widget outer shell — mobile ── */
+@media (max-width: 600px) {
+  .hero-widget {
+    min-height: calc(100dvh - 110px);
+    padding: 28px 16px;
+    border-radius: var(--radius-md);  /* 16px — compact & clean */
+    border-color: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .hero-widget:hover {
+    transform: none;
+    background: rgba(255, 255, 255, 0.02);
+  }
 }
 
 .hero-actions {
@@ -405,10 +434,18 @@ section.widget {
   width: 100%;
 }
 
+/* ── Tablet: stack grid, keep terminal visible ── */
 @media (max-width: 900px) {
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 28px;
+  }
+}
+
+/* ── Mobile: tighter gap ── */
+@media (max-width: 600px) {
+  .hero-grid {
+    gap: 24px;
   }
 }
 
@@ -522,26 +559,71 @@ section.widget {
   }
 }
 
+/* ── Tablet (≤900px): compact terminal, refined layout ── */
 @media (max-width: 900px) {
+  .hero-desc {
+    max-width: 100%;
+  }
+
+  .hero-terminal {
+    max-width: 100%;
+    justify-self: center;
+  }
+
+  .terminal-body {
+    height: 220px;
+  }
+
+  /* Hide focus tags on tablet/mobile */
+  .hero-focus-tags {
+    display: none;
+  }
+}
+
+/* ── Small tablets / large phones (≤768px): hide terminal ── */
+@media (max-width: 768px) {
   .hero-terminal {
     display: none;
   }
+}
 
-  /* Buttons full width on mobile */
+/* ── Mobile (≤600px): polished compact hero ── */
+@media (max-width: 600px) {
+  .hero-desc {
+    font-size: var(--fs-body);
+    max-width: 100%;
+  }
+
   .hero-actions {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     width: 100%;
+    gap: 10px;
   }
 
   .hero-actions .btn-system {
-    width: 100%;
     justify-content: center;
     text-align: center;
+    padding: 12px 20px;
+    font-size: 12px;
   }
 
-  /* Hide focus tags entirely on mobile */
-  .hero-focus-tags {
-    display: none;
+  .hero-socials {
+    margin-top: 20px;
+    padding-top: 14px;
+    gap: 10px;
+  }
+
+  .socials-label {
+    font-size: 10px;
+  }
+
+  .hero-greeting {
+    font-size: var(--fs-body);
+  }
+
+  .hero-title .dot-matrix {
+    font-size: 22px;
   }
 }
 
@@ -2474,11 +2556,10 @@ section.widget {
     height: 40px;
   }
 
-  .hero-widget {
-    min-height: calc(100vh - 100px);
-    min-height: calc(100dvh - 100px);
-    padding-top: 26px;
-    padding-bottom: 26px;
+  /* hero-widget sizing handled above in component-level media queries */
+
+  .hero-title {
+    font-size: clamp(28px, 8vw, 48px);
   }
 
   .minimal-footer {
