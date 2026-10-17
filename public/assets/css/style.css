@@ -1481,23 +1481,29 @@ section.widget {
   /* Chrome, Safari */
 }
 
-.projects-grid::-webkit-scrollbar {
-  display: none;
-  /* Chrome, Safari */
-}
-
 @media (min-width: 900px) {
   .projects-grid {
-    grid-auto-flow: row;
-    grid-template-columns: repeat(2, 1fr);
-    overflow-x: visible;
-    padding-bottom: 0;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% - 36px) / 2.3);
+    gap: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding-top: 6px;
+    padding-bottom: 20px;
 
     /* Reset edge bleed for desktop */
     margin-left: 0;
     margin-right: 0;
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+
+  .projects-grid::-webkit-scrollbar {
+    display: none;
   }
 }
 
@@ -1601,32 +1607,82 @@ section.widget {
   filter: grayscale(0%) opacity(1) !important;
 }
 
-/* HERO BENTO CARD (Span 2) */
+/* OPTION C: UNIFORM DESKTOP CARDS IN CAROUSEL */
 @media (min-width: 900px) {
+  .bento-card {
+    height: 100%;
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+    scroll-snap-align: start;
+    border-radius: 14px;
+    border: 1px solid var(--glass-border);
+    background: var(--surface);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.35s ease, 
+                border-color 0.35s ease;
+  }
+
+  .bento-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .bento-card .bento-img {
+    height: 220px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--glass-border);
+    border-left: none;
+    background: var(--surface-low);
+    flex-shrink: 0;
+  }
+
+  .bento-card .bento-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+    filter: brightness(0.9) grayscale(10%);
+  }
+
+  .bento-card:hover .bento-img img {
+    transform: scale(1.05);
+    filter: brightness(1) grayscale(0%);
+  }
+
+  .bento-card .bento-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 24px;
+    text-align: left;
+    max-width: 100%;
+  }
+
+  /* Reset any first-child overrides from previous desktop layouts */
   #featuredProjects .bento-card:nth-child(1) {
-    grid-column: span 2;
-    flex-direction: row-reverse;
-    min-height: 320px;
+    grid-column: auto;
+    flex-direction: column;
+    min-height: 480px;
   }
 
   #featuredProjects .bento-card:nth-child(1) .bento-img {
-    flex: 1 1 50%;
-    max-width: 50%;
-    aspect-ratio: auto;
-    border-bottom: none;
-    border-left: 1px solid var(--glass-border);
-  }
-
-  #featuredProjects .bento-card:nth-child(1) .bento-img img {
-    height: 100%;
-    object-fit: cover;
+    flex: none;
+    max-width: 100%;
+    height: 220px;
+    border-left: none;
+    border-bottom: 1px solid var(--glass-border);
   }
 
   #featuredProjects .bento-card:nth-child(1) .bento-content {
-    flex: 1 1 50%;
-    max-width: 50%;
-    justify-content: center;
-    padding: 48px;
+    flex: 1;
+    max-width: 100%;
+    padding: 24px;
+    justify-content: flex-start;
   }
 }
 
@@ -1713,6 +1769,112 @@ section.widget {
     margin-right: 0;
     padding-left: 0;
     padding-right: 0;
+  }
+}
+
+/* ==========================================================================
+   CAROUSEL CONTROLS (OPTION C - DESKTOP ONLY)
+   ========================================================================== */
+.projects-controls-group {
+  display: contents;
+}
+
+.carousel-nav-desktop,
+.carousel-pagination-desktop {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .projects-controls-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .carousel-nav-desktop {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .carousel-nav-btn {
+    background: var(--surface-mid);
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .carousel-nav-btn:hover:not(:disabled) {
+    background: var(--surface-high);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+    color: var(--text-main);
+  }
+
+  .carousel-nav-btn:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+    border-color: transparent;
+  }
+
+  .carousel-pagination-desktop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 0 4px;
+  }
+
+  .carousel-dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--surface-high);
+    border: 1px solid var(--glass-border);
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .carousel-dot:hover {
+    background: var(--text-dim);
+  }
+
+  .carousel-dot.active {
+    width: 28px;
+    background: var(--text-main);
+    border-color: var(--text-main);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+  }
+
+  .carousel-counter {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.12em;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .carousel-counter .current {
+    color: var(--text-main);
   }
 }
 

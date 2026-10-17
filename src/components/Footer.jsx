@@ -6,7 +6,6 @@ export default function Footer() {
       <footer className="minimal-footer">
         <div className="mf-left">
           <span className="mf-copy">© <span id="yearNow">{new Date().getFullYear()}</span> ANKIT SHRESTHA</span>
-          <span className="mf-divider bug-target" data-bug="3" style={{cursor: 'help'}}>\</span>
           <span className="mf-status">
             <span className="mf-dot"></span>
             <span>AVAILABLE FOR WORK</span>

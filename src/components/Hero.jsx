@@ -26,7 +26,7 @@ export default function Hero({ containerVariants, itemVariants }) {
             <motion.span variants={itemVariants} className="hero-greeting">Hi, I'm</motion.span>
             <motion.h1 variants={itemVariants} className="hero-title">
               <span className="dot-matrix">Ankit</span>
-              QA<br />Enginee<span className="bug-target" data-bug="1" style={{display: 'inline-block', transform: 'translateY(-2px) rotate(8deg)', cursor: 'help'}}>r</span>
+              QA<br />Engineer
             </motion.h1>
 
             <motion.p variants={itemVariants} className="hero-desc">
