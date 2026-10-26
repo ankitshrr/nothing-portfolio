@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Lenis from 'lenis';
+import { MotionConfig } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -12,10 +13,11 @@ import Footer from './components/Footer';
 import SkillSheet from './components/SkillSheet';
 import useScrollSpy from './hooks/useScrollSpy';
 
+const SECTION_IDS = ['home', 'about', 'experience', 'skills', 'contributions', 'work', 'contact'];
+
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
-  const sectionIds = ['home', 'about', 'experience', 'skills', 'contributions', 'work', 'contact'];
-  const { activeSection } = useScrollSpy(sectionIds);
+  const { activeSection } = useScrollSpy(SECTION_IDS);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -58,53 +60,56 @@ function App() {
     }
     window.scrollTo(0, 0);
 
-    // Initialize Lenis
-    const lenis = new Lenis({
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const lenis = prefersReducedMotion ? null : new Lenis({
       autoRaf: true,
       smoothWheel: true
     });
 
-    // Handle anchor links for Lenis
-    const handleAnchorClick = (e) => {
-      const href = e.currentTarget.getAttribute('href');
-      if (href && href.startsWith('#')) {
+    const handleDocumentClick = (e) => {
+      const backToTop = e.target.closest('.mf-back-top');
+      if (backToTop) {
         e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-          lenis.scrollTo(target);
+        if (lenis) {
+          lenis.scrollTo(0);
+        } else {
+          window.scrollTo({ top: 0, behavior: 'auto' });
         }
+        return;
+      }
+
+      const link = e.target.closest('a[href^="#"]');
+      if (!link) return;
+
+      const href = link.getAttribute('href');
+      if (!href || href === '#') return;
+
+      const target = document.querySelector(href);
+      if (!target) return;
+
+      e.preventDefault();
+      history.replaceState(null, '', href);
+      if (lenis) {
+        lenis.scrollTo(target, { offset: -100 });
+      } else {
+        window.scrollTo({
+          top: target.getBoundingClientRect().top + window.scrollY - 100,
+          behavior: 'auto'
+        });
       }
     };
-
-    const anchorLinks = document.querySelectorAll('a[href^="#"]');
-    anchorLinks.forEach(link => {
-      link.addEventListener('click', handleAnchorClick);
-    });
-
-    // Handle back to top button specifically
-    const backToTop = document.querySelector('.mf-back-top');
-    const handleBackToTop = () => {
-      lenis.scrollTo(0);
-    };
-    if (backToTop) {
-      backToTop.addEventListener('click', handleBackToTop);
-    }
+    document.addEventListener('click', handleDocumentClick);
 
     return () => {
-      anchorLinks.forEach(link => {
-        link.removeEventListener('click', handleAnchorClick);
-      });
-      if (backToTop) {
-        backToTop.removeEventListener('click', handleBackToTop);
-      }
-      lenis.destroy();
+      document.removeEventListener('click', handleDocumentClick);
+      lenis?.destroy();
     };
   }, []);
 
   return (
-    <>
-
-
+    <MotionConfig reducedMotion="user">
+      <>
+      <a href="#about" className="skip-link">Skip to content</a>
       <div id="scrollProgress"></div>
       
       <Navbar toggleTheme={toggleTheme} theme={theme} activeSection={activeSection} />
@@ -115,7 +120,7 @@ function App() {
           <About />
           <Experience />
           <Skills />
-          <Contributions />
+          <Contributions theme={theme} />
           <Projects />
           <Contact />
           <Footer />
@@ -123,7 +128,8 @@ function App() {
       </main>
 
       <div id="bugToast" className="bug-toast"></div>
-    </>
+      </>
+    </MotionConfig>
   );
 }
 

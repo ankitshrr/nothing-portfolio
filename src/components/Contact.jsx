@@ -91,7 +91,7 @@ export default function Contact() {
             <div className="cf-row">
               <div className="cf-group">
                 <label className="cf-label" htmlFor="cf-name">Your Name</label>
-                <input className="cf-input" id="cf-name" type="text" placeholder="Ankit Shrestha" required autoComplete="name" />
+                <input className="cf-input" id="cf-name" type="text" placeholder="Jane Doe" required autoComplete="name" />
               </div>
               <div className="cf-group">
                 <label className="cf-label" htmlFor="cf-email">Email Address</label>
@@ -110,7 +110,7 @@ export default function Contact() {
               Send Message
               <Send size={16} strokeWidth={2.5} />
             </button>
-            <div id="cfToast" className="cf-toast" style={{ opacity: toastVisible ? 1 : 0 }}>{toastMsg}</div>
+            <div id="cfToast" className="cf-toast" role="status" aria-live="polite" style={{ opacity: toastVisible ? 1 : 0 }}>{toastMsg}</div>
           </form>
         </div>
       </motion.section>
