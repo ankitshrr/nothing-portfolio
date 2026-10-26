@@ -61,7 +61,7 @@ export default function Hero({ containerVariants, itemVariants }) {
           </div>
 
           {/*  AUTOMATION TERMINAL  */}
-          <motion.div variants={itemVariants} className="hero-terminal" aria-hidden="true" onClick={runAnimation} style={{cursor: 'pointer'}}>
+          <motion.div variants={itemVariants} className="hero-terminal" aria-hidden="true" onClick={runAnimation} title="Click to replay" style={{cursor: 'pointer'}}>
             <div className="terminal-header">
               <div className="term-dots">
                 <span className="term-dot close"></span>
@@ -69,6 +69,7 @@ export default function Hero({ containerVariants, itemVariants }) {
                 <span className="term-dot max"></span>
               </div>
               <div className="term-title">ankit@qa-automation:~</div>
+              <span className="term-replay">click to replay</span>
             </div>
             <div className="terminal-body" ref={termBodyRef}>
               <div className="term-line">

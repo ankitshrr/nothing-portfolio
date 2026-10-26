@@ -2,6 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './Navbar.css';
 
+const NAV_LINKS = [
+  { href: '#about', label: 'About', id: 'about' },
+  { href: '#experience', label: 'Experience', id: 'experience' },
+  { href: '#skills', label: 'Skills', id: 'skills' },
+  { href: '#work', label: 'My Work', id: 'work' },
+  { href: '#contact', label: 'Contact', id: 'contact' }
+];
+
 export default function Navbar({ toggleTheme, theme, activeSection }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -17,6 +25,20 @@ export default function Navbar({ toggleTheme, theme, activeSection }) {
   useEffect(() => {
     triggerNavGlyphs();
   }, []);
+
+  useEffect(() => {
+    if (!isExpanded) return;
+
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        setIsExpanded(false);
+        document.body.classList.remove('no-scroll');
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isExpanded]);
 
   const handleNavClick = () => {
     setIsExpanded(false);
@@ -46,10 +68,16 @@ export default function Navbar({ toggleTheme, theme, activeSection }) {
           </a>
 
           <div className="nav-menu" id="navMenu">
-            <a href="#about" onClick={handleNavClick} className={`nav-link ${activeSection === 'about' ? 'active' : ''}`}>About</a>
-            <a href="#skills" onClick={handleNavClick} className={`nav-link ${activeSection === 'skills' ? 'active' : ''}`}>Skills</a>
-            <a href="#work" onClick={handleNavClick} className={`nav-link ${activeSection === 'work' ? 'active' : ''}`}>My Work</a>
-            <a href="#contact" onClick={handleNavClick} className={`nav-link ${activeSection === 'contact' ? 'active' : ''}`}>Contact</a>
+            {NAV_LINKS.map(link => (
+              <a
+                key={link.id}
+                href={link.href}
+                onClick={handleNavClick}
+                className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
 
           <div className="nav-actions">
@@ -66,7 +94,7 @@ export default function Navbar({ toggleTheme, theme, activeSection }) {
               )}
             </button>
 
-            <button className="nav-hamburger" onClick={toggleNav} aria-label="Open menu" aria-expanded={isExpanded ? "true" : "false"}>
+            <button className="nav-hamburger" onClick={toggleNav} aria-label={isExpanded ? 'Close menu' : 'Open menu'} aria-expanded={isExpanded}>
               <span></span><span></span><span></span>
             </button>
           </div>
@@ -84,12 +112,7 @@ export default function Navbar({ toggleTheme, theme, activeSection }) {
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
           >
             <div className="side-panel-links">
-              {[
-                { href: "#about", label: "About", id: "about" },
-                { href: "#skills", label: "Skills", id: "skills" },
-                { href: "#work", label: "My Work", id: "work" },
-                { href: "#contact", label: "Contact", id: "contact" }
-              ].map((link, idx) => (
+              {NAV_LINKS.map((link, idx) => (
                 <motion.a
                   key={link.id}
                   href={link.href}

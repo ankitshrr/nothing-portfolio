@@ -155,6 +155,7 @@ export default function Projects() {
                   key={cat.key}
                   className={`filter-btn ${activeFilter === cat.key ? 'active' : ''}`}
                   data-filter={cat.key}
+                  aria-pressed={activeFilter === cat.key}
                   onClick={() => handleFilterClick(cat.key)}
                 >
                   <Icon size={14} strokeWidth={2} />
@@ -205,18 +206,7 @@ export default function Projects() {
                     <div className="bento-header">
                       <div>
                         {project.featured && (
-                          <span style={{
-                            fontFamily: '"JetBrains Mono", monospace', 
-                            fontSize: '10px', 
-                            padding: '4px 8px', 
-                            background: 'rgba(255,255,255,0.1)', 
-                            borderRadius: '4px', 
-                            marginBottom: '8px', 
-                            display: 'inline-block', 
-                            textTransform: 'uppercase', 
-                            letterSpacing: '0.1em', 
-                            color: 'var(--text-main)'
-                          }}>
+                          <span className="bento-badge">
                             Featured
                           </span>
                         )}
@@ -224,23 +214,11 @@ export default function Projects() {
                       </div>
                     </div>
                     
-                    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '12px' }}>
+                    <div className="bento-metrics">
                       {project.metrics.map((metric, idx) => (
                         <span 
                           key={idx}
-                          className="qa-metric-badge" 
-                          style={{
-                            display: 'inline-flex', 
-                            alignItems: 'center', 
-                            padding: '4px 8px', 
-                            borderRadius: '4px', 
-                            background: 'rgba(255,255,255,0.05)', 
-                            color: '#E5E7EB', 
-                            fontFamily: '"JetBrains Mono",monospace', 
-                            fontSize: '9.5px', 
-                            border: '1px solid rgba(255,255,255,0.1)'
-                          }}
-                        >
+                          className="qa-metric-badge">
                           {metric}
                         </span>
                       ))}
@@ -248,49 +226,23 @@ export default function Projects() {
                     
                     <p className="bento-desc">{project.desc}</p>
                     
-                    <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '11px', color: 'var(--text-muted)', marginBottom: '16px' }}>
+                    <div className="bento-tech">
                       {project.tech}
                     </div>
                     
-                    <div style={{ 
-                      display: 'flex', 
-                      justifyContent: 'space-between', 
-                      alignItems: 'center', 
-                      width: '100%', 
-                      marginTop: 'auto', 
-                      paddingTop: '16px', 
-                      borderTop: '1px solid rgba(255,255,255,0.05)' 
-                    }}>
+                    <div className="bento-footer">
                       {project.actionType === 'link' ? (
                         <a 
                           href={project.demoUrl} 
                           target="_blank" 
                           rel="noopener" 
-                          style={{
-                            display: 'inline-flex', 
-                            alignItems: 'center', 
-                            gap: '6px', 
-                            fontSize: '13px', 
-                            fontWeight: '600', 
-                            color: 'var(--text-main)', 
-                            textDecoration: 'none', 
-                            transition: 'opacity 0.2s'
-                          }} 
-                          onMouseOver={(e) => { e.currentTarget.style.opacity = '0.8'; }} 
-                          onMouseOut={(e) => { e.currentTarget.style.opacity = '1'; }}
+                          className="bento-link"
                         >
                           Live Demo
                           <ArrowRight size={14} strokeWidth={2} />
                         </a>
                       ) : (
-                        <span style={{ 
-                          fontSize: '13px', 
-                          fontWeight: '600', 
-                          color: 'var(--text-muted)', 
-                          display: 'inline-flex', 
-                          alignItems: 'center', 
-                          gap: '6px' 
-                        }}>
+                        <span className="bento-cli">
                           CLI Tool
                           <Terminal size={14} strokeWidth={2} />
                         </span>
@@ -300,20 +252,7 @@ export default function Projects() {
                         href={project.githubUrl} 
                         target="_blank" 
                         rel="noopener" 
-                        style={{
-                          display: 'flex', 
-                          alignItems: 'center', 
-                          justifyContent: 'center', 
-                          width: '36px', 
-                          height: '36px', 
-                          background: 'rgba(255,255,255,0.05)', 
-                          borderRadius: '8px', 
-                          color: 'var(--text-main)', 
-                          textDecoration: 'none', 
-                          transition: 'background 0.2s'
-                        }} 
-                        onMouseOver={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; }} 
-                        onMouseOut={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; }} 
+                        className="bento-gh"
                         aria-label="GitHub Repository"
                       >
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -340,9 +279,9 @@ export default function Projects() {
                 ))}
               </div>
               <div className="carousel-counter">
-                <span className="current">0{scrollState.activeIndex + 1}</span>
+                <span className="current">{String(scrollState.activeIndex + 1).padStart(2, '0')}</span>
                 <span className="divider">/</span>
-                <span className="total">0{filteredProjects.length}</span>
+                <span className="total">{String(filteredProjects.length).padStart(2, '0')}</span>
               </div>
             </div>
           </>
@@ -358,4 +297,3 @@ export default function Projects() {
     </motion.section>
   );
 }
-

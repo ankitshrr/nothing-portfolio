@@ -124,6 +124,9 @@ export default function Skills() {
                 className={`radar-node ${activeNode?.id === node.id ? 'active' : ''}`}
                 onClick={() => handleNodeClick(node)}
                 onMouseEnter={() => !isMobile && setHoveredNode(node)}
+                onFocus={() => !isMobile && setHoveredNode(node)}
+                onBlur={() => setHoveredNode(null)}
+                aria-pressed={activeNode?.id === node.id}
               >
                 {node.icon}
                 <span>{node.skill}</span>
@@ -160,7 +163,7 @@ export default function Skills() {
                   <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.3">
                     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                   </svg>
-                  <p style={{marginTop: "16px", opacity: 0.6}}>HOVER OVER A NODE ON THE RADAR TO EXTRACT DATA.</p>
+                  <p style={{marginTop: "16px", opacity: 0.6}}>HOVER OR SELECT A NODE TO EXTRACT DATA.</p>
                 </div>
               )}
             </div>

@@ -391,7 +391,7 @@ nav.expanded .nav-hamburger span:nth-child(3) {
 }
 
 /* MOBILE NAV */
-@media (max-width: 980px) {
+@media (max-width: 860px) {
   .nav-hamburger {
     display: flex;
   }
@@ -461,4 +461,3 @@ nav.expanded .nav-hamburger span:nth-child(3) {
     left: 10%;
   }
 }
-

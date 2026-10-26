@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Flame } from 'lucide-react';
 import useGithubStats from '../hooks/useGithubStats';
 
-export default function Contributions() {
+export default function Contributions({ theme }) {
   const { total, bestDay, streak, longestStreak, streakActive, longestStreakActive } = useGithubStats('ankitshrr');
 
   return (
@@ -48,7 +49,7 @@ export default function Contributions() {
             </div>
             <div className="pac-sec-divider"></div>
             <div className={`pac-sec-chip ${streakActive ? 'streak-active' : ''}`}>
-              <span className="pac-streak-icon">🔥</span>
+              <Flame className="pac-streak-icon" size={13} strokeWidth={2.5} />
               <span className="pac-sec-label">Current Streak</span>
               <span className="pac-sec-value">{streak}</span>
             </div>
@@ -67,17 +68,19 @@ export default function Contributions() {
 
         {/* Graph */}
         <div className="pac-graph-wrapper">
-          <picture>
-            <source media="(prefers-color-scheme: dark)" srcSet="https://raw.githubusercontent.com/ankitshrr/ankitshrr/output/pacman-contribution-graph-dark.svg" />
-            <source media="(prefers-color-scheme: light)" srcSet="https://raw.githubusercontent.com/ankitshrr/ankitshrr/output/pacman-contribution-graph.svg" />
-            <img className="pacman-graph-img" alt="pacman contribution graph" src="https://raw.githubusercontent.com/ankitshrr/ankitshrr/output/pacman-contribution-graph.svg" />
-          </picture>
+          <img
+            className="pacman-graph-img"
+            alt="pacman contribution graph"
+            src={theme === 'dark'
+              ? 'https://raw.githubusercontent.com/ankitshrr/ankitshrr/output/pacman-contribution-graph-dark.svg'
+              : 'https://raw.githubusercontent.com/ankitshrr/ankitshrr/output/pacman-contribution-graph.svg'}
+          />
         </div>
 
         {/* Legend: GitHub green palette */}
         <div className="pac-legend-row">
           <span className="pac-legend-text">Less</span>
-          <div className="pac-legend-cell" style={{background:"#161b22", border:"1px solid rgba(255,255,255,0.1)"}}></div>
+          <div className="pac-legend-cell" style={{ background: 'var(--surface-high)', border: '1px solid var(--glass-border)' }}></div>
           <div className="pac-legend-cell" style={{background:"#0e4429"}}></div>
           <div className="pac-legend-cell" style={{background:"#006d32"}}></div>
           <div className="pac-legend-cell" style={{background:"#26a641"}}></div>
